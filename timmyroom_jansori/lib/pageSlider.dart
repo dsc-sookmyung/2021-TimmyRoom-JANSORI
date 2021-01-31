@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'testPage.dart';
+import 'page1.dart';
+import 'timer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,8 +18,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // title appBar랑 actions은 같이..
+      /*
       appBar: AppBar(title: Text('page view'),
-
       // curve 바꾸면 different action
       actions: [
         IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
         }),
       ],
       ),
+       */
       body: PageView(
         //pageSnapping: true,
         controller: pageController,
@@ -39,7 +41,9 @@ class _HomePageState extends State<HomePage> {
           print(pageChanged);
         },
         children: [
+
           Container(color: Colors.indigo),
+          TimeCheck(),
           Container(color: Colors.red),
           Container(color: Colors.brown),
           testPage1(),

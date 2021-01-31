@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'main.dart';
 
 class testPage1 extends StatelessWidget {
   Widget build(BuildContext context) {
