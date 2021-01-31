@@ -41,12 +41,21 @@ class _HomePageState extends State<HomePage> {
           print(pageChanged);
         },
         children: [
-
-          Container(color: Colors.indigo),
-          TimeCheck(),
-          Container(color: Colors.red),
+          HelpSection(),
+          Container(
+              color: Colors.indigo,
+              child: Container(
+                width: 300,
+                height: 200,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 10),
+                ),
+                child: Text("fullter"),
+              )
+          ),
+          // TimeCheck(),
+          // Container(color: Colors.red),
           Container(color: Colors.brown),
-          testPage1(),
 
         ],
       )
