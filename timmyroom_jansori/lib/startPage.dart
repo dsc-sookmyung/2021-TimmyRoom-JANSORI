@@ -95,35 +95,51 @@ class _StartPageState extends State<StartPage> {
                       )
                   ),
                   SizedBox(height:5,),
-                  // 토글바 2
+
+
+                  Container(
+                    height: 50,
+                    width: 170,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.3),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Row(
+                                children: <Widget>[
+                                  Icon( Icons.label, color:Colors.white, size:25),
+                                  SizedBox(width: 8),
+                                  Text("block mode",
+                                    style: TextStyle(color:Colors.white)),
+                                  Switch(
+                                    value: isOn,
+                                    onChanged: (bool value) {
+                                      setState(() {
+                                        isOn = value;
+                                        print(isOn);
+                                      });
+                                    },
+                                    activeTrackColor: Colors.yellow,
+                                    activeColor: Colors.deepOrange,
+                                  ),
+                                ]
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
                   SizedBox(height: 10,),
                   // list view 그 .. 내 할일 목록이요
 
-                  Expanded(
-                    child: Container(
-
-                      height: 30,
-                      width:50,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.9),
-                      ),
-                      child :Switch(
-                        value: isOn,
-                        onChanged: (bool value) {
-                          setState(() {
-                            isOn = value;
-                            print(isOn);
-                          });
-                        },
-                        activeTrackColor: Colors.yellow,
-                        activeColor: Colors.deepOrange,
-                      ),
-                      //margin: EdgeInsets.symmetric(vertical: 10.0),
 
 
-
-                    ),
-                  ),
                 ],
               ),
             )
