@@ -40,17 +40,16 @@ dev_dependencies:
 flutter:
 
   fonts:
-  - family: Roboto
-    fonts:
-      - asset: fonts/Roboto-Bold.ttf
-        weight: 700
-      - asset: fonts/Roboto-Regular.ttf
-        weight: 400
-
-  - family: RobotoMono
-    fonts:
-      - asset: fonts/RobotoMono-Regular.ttf
-        weight: 400
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
+        - asset: fonts/Roboto-Regular.ttf
+          weight: 400
+    - family: RobotoMono
+      fonts:
+        - asset: fonts/RobotoMono-Regular.ttf
+          weight: 400
 
   uses-material-design: true
 
