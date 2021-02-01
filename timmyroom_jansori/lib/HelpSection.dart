@@ -54,7 +54,7 @@ class HelpSection extends StatelessWidget {
                           offset: Offset(0,3),
                         ),
                       ]
-                  ),
+                    ),
 
                     // color: Colors.white,
                     // child: Text('test') 이 박스 안에 뭘 더 넣고 싶다.

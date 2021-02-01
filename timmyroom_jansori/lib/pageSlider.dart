@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'testPage.dart';
-import 'page1.dart';
-import 'timer.dart';
+import 'HelpSection.dart';
+import 'startPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
           print(pageChanged);
         },
         children: [
+          StartPage(),
           HelpSection(),
           Container(
               color: Colors.indigo,
