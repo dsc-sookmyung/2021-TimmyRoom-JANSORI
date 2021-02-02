@@ -21,7 +21,7 @@ class DBHelper {
     return _database;
   }
 
-  initDB() async {
+  Future<Database> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, 'toDosDB.db');
 
@@ -31,7 +31,7 @@ class DBHelper {
         onCreate: (db, version) async {
           await db.execute('''
             CREATE TABLE $tableName(
-              'id' INTEGER PRIMARY KEY,
+              'id' INTEGER NOT NULL PRIMARY KEY,
               'name' TEXT,
               'duringTime' INTEGER,
               'restTime' INTEGER

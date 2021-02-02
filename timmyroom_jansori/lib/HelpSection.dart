@@ -91,7 +91,6 @@ class _HelpSectionState extends State<HelpSection> {
                       // padding: const EdgeInsets.all(8.0),
                       height: 100,
                       width: 150,
-
                       // 그림자를 주자
                       decoration: BoxDecoration(
                         color: Colors.white,
