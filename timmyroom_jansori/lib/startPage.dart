@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'data.dart';
 import "timer.dart";
+import 'package:carousel_slider/carousel_slider.dart';
+import "theme_data.dart";
 
 class StartPage extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   bool toggleValue = false;
   bool isOn = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,8 +28,8 @@ class _StartPageState extends State<StartPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       // 큰 원을 그린다
-                      height: 230,
-                      width: 230,
+                      height: 150,
+                      width: 150,
 
                       decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.9),
@@ -46,7 +49,7 @@ class _StartPageState extends State<StartPage> {
                     ),
                   ),
                   SizedBox(height: 20,),
-                  // 토글 바 1
+                  /* 토글 바
                   AnimatedContainer(
                       duration: Duration(milliseconds: 500),
                       height: 35.0,
@@ -94,9 +97,11 @@ class _StartPageState extends State<StartPage> {
                           ]
                       )
                   ),
+
                   SizedBox(height:5,),
+                   */
 
-
+                  // 토글바 2
                   Container(
                     height: 50,
                     width: 170,
@@ -134,17 +139,61 @@ class _StartPageState extends State<StartPage> {
                       ],
                     ),
                   ),
-
                   SizedBox(height: 10,),
                   // list view 그 .. 내 할일 목록이요
 
 
 
+
+
+
                 ],
               ),
+
+
+
+
+
+
+
+
+
+
+
+                  /*
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+
+                        CarouselSlider(
+                          height: 200.0,
+                          initialPage: 0,
+                          onPageChanged: (index){
+                            setState(() {
+                              _currentToDo = index;
+                            });
+                          },
+
+                          ),
+
+                         */
+
+
+
+
+
+
+
+
+
+
+
+
+              ),
             )
-        )
-    );
+        );
   }
   toggleButton() {
     setState(() {
