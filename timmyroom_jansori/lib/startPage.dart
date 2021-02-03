@@ -36,7 +36,7 @@ class _StartPageState extends State<StartPage> {
     print("시작");
     // print(_dbHelper.database); Future<Database>
     _dbHelper.initDB().then((value) {
-      print('-----------datata intialized');
+      print('-----------datata intialized---------');
       loadToDos();
     });
     super.initState();
