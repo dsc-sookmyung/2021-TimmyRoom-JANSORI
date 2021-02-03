@@ -5,9 +5,9 @@ import 'package:timmyroom_jansori/models/todo_info.dart';
 
 final String tableName = 'toDos';
 final String colId = 'id';
-final String colName = 'name';
-final String colDuringTime = 'duringTime';
-final String colRestTime = 'restTime';
+String colName = 'name';
+String colDuringTime = 'duringTime';
+String colRestTime = 'restTime';
 
 class DBHelper {
   static Database _database;
