@@ -349,13 +349,6 @@ class _StartPageState extends State<StartPage> {
     });
   }
   void onSaveToDo() {
-    var todoInfo = ToDoInfo(
-      name: colName,
-      duringTime: int.parse(colDuringTime),
-      restTime: int.parse(colRestTime),
-    );
-    _dbHelper.insertToDo(todoInfo);
-    print(colName);
     loadToDos();
   }
 

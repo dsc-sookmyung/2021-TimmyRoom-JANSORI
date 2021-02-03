@@ -6,6 +6,7 @@ import 'minutes.dart';
 import 'free.dart';
 
 import 'DBHelper.dart';
+import './models/todo_info.dart';
 
 // import 'year_month_day_time_picker.dart';
 
@@ -73,6 +74,15 @@ class Page3 extends State<MainPage3>{
 
     form.save();
     print('saved $colDuringTime, $colRestTime, $colName.');
+
+    DBHelper _dbHelper = DBHelper();
+    var todoInfo = ToDoInfo(
+      name: colName,
+      duringTime: int.parse(colDuringTime),
+      restTime: int.parse(colRestTime),
+    );
+    _dbHelper.insertToDo(todoInfo);
+    print(colName);
   }
 
   Widget submitButton(){
