@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'hours.dart';
+
 // import 'year_month_day_time_picker.dart';
 
 class MainPage3 extends StatefulWidget{
@@ -82,7 +84,6 @@ class Page3 extends State<MainPage3>{
   }
 
   Widget timeSetting(){
-    int _value;
 
     return Container(
       width: 255,
@@ -156,48 +157,10 @@ class Page3 extends State<MainPage3>{
                             child:
                               Row(
                                 children: [
-                                  DropdownButton(
-                                    value: _value,
-                                    items: [
-                                      DropdownMenuItem(
-                                        child: Text("0"),
-                                        value: 1,
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("1"),
-                                        value: 2,
-                                      ),
-                                      DropdownMenuItem(
-                                          child: Text("2"),
-                                          value: 3
-                                      ),
-                                      DropdownMenuItem(
-                                          child: Text("3"),
-                                          value: 4
-                                      ),
-                                      DropdownMenuItem(
-                                          child: Text("4"),
-                                          value: 5
-                                      ),
-                                      DropdownMenuItem(
-                                          child: Text("5"),
-                                          value: 6
-                                      ),
-                                      DropdownMenuItem(
-                                          child: Text("6"),
-                                          value: 7
-                                      )
-                                    ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _value = value;
-                                    });
-                                  },
-                                  //value: _value,
-                                  ),
+                                  hours(),
                                   Container(
                                     margin: EdgeInsets.fromLTRB(10, 0, 5, 0),
-                                    child: Text("시간"),
+                                    child: Text("시간", style: TextStyle(fontWeight: FontWeight.bold),),
                                   ),
                                 ],
                               ),
