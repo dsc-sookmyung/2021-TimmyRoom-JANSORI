@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+
+
+
 class alarmList extends StatelessWidget {
 
   List titles=["모델 돌리기","코딩하기","3","4","5","6","7","8","9","10"];
@@ -22,10 +25,11 @@ class alarmList extends StatelessWidget {
             ),
             child:Container(
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
                 gradient:LinearGradient(
-                  begin:Alignment.centerLeft,
-                  end:Alignment.centerRight,
-                  colors:[Color.fromRGBO(100, 72 , 254, 0.8),Color.fromRGBO(95, 198, 255, 0.8)]
+                    begin:Alignment.centerLeft,
+                    end:Alignment.centerRight,
+                    colors:[Color.fromRGBO(100, 72 , 254, 0.8),Color.fromRGBO(95, 198, 255, 0.8)]
                 ),
               ),
               width:MediaQuery.of(context).size.width,
@@ -35,27 +39,29 @@ class alarmList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children:<Widget>[
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children:<Widget>[
-                      Container(
-                        width:55.0,
-                        height:55.0,
-                        child:CircleAvatar(
-                          backgroundColor: Colors.blue,
-                          foregroundColor: Colors.blue,
-                          backgroundImage: NetworkImage("https://www.woolha.com/media/2020/03/eevee.png"),
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children:<Widget>[
+                        Container(
+                          width:55.0,
+                          height:55.0,
+                          color: Colors.white,
+                          child:
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.white,
+                            backgroundImage: AssetImage("images/on.png"),
+                          ),
                         ),
-                      ),
-                      SizedBox(width:5.0),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:<Widget>[
-                          Text(titles[index],style:TextStyle(color:Colors.white,fontSize:18.0,fontWeight: FontWeight.bold)),
-                          Text(subTitles[index],style:TextStyle(color:Colors.white)),
-                        ],
-                      ),
-                    ]
+                        SizedBox(width:15.0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:<Widget>[
+                            Text(titles[index],style:TextStyle(color:Colors.white,fontSize:18.0,fontWeight: FontWeight.bold)),
+                            Text(subTitles[index],style:TextStyle(color:Colors.white)),
+                          ],
+                        ),
+                      ]
                   ),
                   Container(
                     alignment:Alignment.center,
@@ -63,10 +69,10 @@ class alarmList extends StatelessWidget {
                     child:Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:<Widget>[
-                        Text("집중 타임",style:TextStyle(color:Colors.white,fontSize:8.0)),
-                        Text(concentrateTime[index],style:TextStyle(color:Colors.white,fontSize:18.0,fontWeight: FontWeight.bold)),
-                        Text("휴식 타임",style:TextStyle(color:Colors.white,fontSize:8.0)),
-                        Text(breakTime[index],style:TextStyle(color:Colors.white,fontSize:18.0,fontWeight: FontWeight.bold)),
+                        Text("집중 타임",style:TextStyle(color:Colors.white,fontSize:10.0)),
+                        Text(concentrateTime[index]+"분",style:TextStyle(color:Colors.white,fontSize:18.0,fontWeight: FontWeight.bold)),
+                        Text("휴식 타임",style:TextStyle(color:Colors.white,fontSize:10.0)),
+                        Text(breakTime[index]+"분",style:TextStyle(color:Colors.white,fontSize:18.0,fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),

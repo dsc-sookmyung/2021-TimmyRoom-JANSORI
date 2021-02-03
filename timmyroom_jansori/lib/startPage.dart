@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import "timer.dart";
 import 'package:carousel_slider/carousel_slider.dart';
 import "theme_data.dart";
 import 'package:timmyroom_jansori/models/todo_info.dart';
