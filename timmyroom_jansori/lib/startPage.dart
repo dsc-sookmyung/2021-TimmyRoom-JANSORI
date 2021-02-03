@@ -355,7 +355,7 @@ class _StartPageState extends State<StartPage> {
       restTime: int.parse(colRestTime),
     );
     _dbHelper.insertToDo(todoInfo);
-    print("저장저장 ");
+    print(colName);
     loadToDos();
   }
 

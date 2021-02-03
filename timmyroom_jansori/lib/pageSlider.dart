@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'testPage.dart';
 import 'alarmList.dart';
+import 'startPage.dart';
+import 'page3.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -43,6 +45,8 @@ class _HomePageState extends State<HomePage> {
           alarmList(),
           Container(color: Colors.brown),
           testPage1(),
+          StartPage(),
+          MainPage3(),
 
         ],
       )
