@@ -33,7 +33,7 @@ class _minutesState extends State<minutes>{
           onChanged: (String newValue) {
             setState(() {
               dropdownValue = newValue;
-              colDuringTime += int.parse(newValue);
+              colRestTime = int.parse(newValue);
             });
           },
           items: m.map((value) {

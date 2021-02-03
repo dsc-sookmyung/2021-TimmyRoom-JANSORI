@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'hours.dart';
 import 'minutes.dart';
+import 'free.dart';
+
+import 'DBHelper.dart';
 
 // import 'year_month_day_time_picker.dart';
 
@@ -11,6 +14,7 @@ class MainPage3 extends StatefulWidget{
 }
 
 class Page3 extends State<MainPage3>{
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context){
@@ -46,15 +50,19 @@ class Page3 extends State<MainPage3>{
                 width: 255,
                 margin: EdgeInsets.all(15),
                 child:
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      timeSetting(),
-                      nameSetting(),
-                      jansoriSetting(),
-                      submitButton(),
-                    ],
-                  ),
+                    Form(
+                      key: _formKey,
+                      child:
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            timeSetting(),
+                            nameSetting(),
+                            jansoriSetting(),
+                            submitButton(),
+                          ],
+                        ),
+                    ),
               ),
           ),
     );
@@ -166,7 +174,7 @@ class Page3 extends State<MainPage3>{
                                     margin: EdgeInsets.fromLTRB(10, 0, 15, 0),
                                     child: Text("시간", style: TextStyle(fontWeight: FontWeight.bold),),
                                   ),
-                                  minutes(),
+                                  free(),
                                   Container(
                                     margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                     child: Text("분", style: TextStyle(fontWeight: FontWeight.bold),),
@@ -228,7 +236,7 @@ class Page3 extends State<MainPage3>{
             Container(
               margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child:
-                  TextField(
+                  TextFormField(
                       focusNode: myFocusNode,
                       style: TextStyle(
                         color: Color.fromRGBO(0, 0, 0, 1),
@@ -243,7 +251,8 @@ class Page3 extends State<MainPage3>{
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Color.fromRGBO(56, 110, 218, 1)),
                         ),
-                      )
+                      ),
+                      onSaved: (val) => colName = val,
                   ),
             ),
           ],

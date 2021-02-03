@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'DBHelper.dart';
+
 class hours extends StatefulWidget{
   hours({Key key}) : super(key: key);
 
@@ -30,9 +32,10 @@ class _hoursState extends State<hours>{
         onChanged: (String newValue) {
           setState(() {
             dropdownValue = newValue;
+            colDuringTime = int.parse(newValue) * 60;
           });
         },
-        items: <String>['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
+          items: <String>['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
             .map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
