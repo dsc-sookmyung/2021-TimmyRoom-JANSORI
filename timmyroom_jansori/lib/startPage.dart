@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import "timer.dart";
 import 'package:carousel_slider/carousel_slider.dart';
 import "theme_data.dart";
 import 'package:timmyroom_jansori/models/todo_info.dart';
@@ -35,7 +36,7 @@ class _StartPageState extends State<StartPage> {
     print("시작");
     // print(_dbHelper.database); Future<Database>
     _dbHelper.initDB().then((value) {
-      print('-----------datata intialized');
+      print('-----------datata intialized---------');
       loadToDos();
     });
     super.initState();
@@ -317,7 +318,7 @@ class _StartPageState extends State<StartPage> {
                                 );
                               }).followedBy([
                                 FloatingActionButton.extended(
-                                  onPressed: onSaveToDo(_date ),
+                                  onPressed: onSaveToDo,
                                   icon: Icon(Icons.alarm),
                                   label: Text('save'),
                                 ),
@@ -347,11 +348,11 @@ class _StartPageState extends State<StartPage> {
       toggleValue = !toggleValue;
     });
   }
-  void onSaveToDo(String _name, int dTime, int rTime) {
+  void onSaveToDo() {
     var todoInfo = ToDoInfo(
-      name: _name,
-      duringTime: dTime,
-      restTime: 32,
+      name: 'ssssss',
+      duringTime: 22,
+      restTime: 11,
     );
     _dbHelper.insertToDo(todoInfo);
     print("저장저장 ");
