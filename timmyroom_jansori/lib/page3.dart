@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'hours.dart';
+import 'minutes.dart';
 
 // import 'year_month_day_time_picker.dart';
 
@@ -117,12 +118,12 @@ class Page3 extends State<MainPage3>{
                         child:
                           Container(
                               height: 20,
-                              // color: Colors.green,
                               child: Container(
+                                margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
                                 child:
                                   Text(
                                     "집중 타임(시간)",
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 12, color: Color.fromRGBO(28, 88, 245, 1)),
                                     textAlign: TextAlign.center,
                                   ),
                               ),
@@ -138,7 +139,7 @@ class Page3 extends State<MainPage3>{
                                 child:
                                 Text(
                                   "휴식 타임(분)",
-                                  style: TextStyle(fontSize: 12),
+                                  style: TextStyle(fontSize: 12, color: Color.fromRGBO(28, 88, 245, 1)),
                                   textAlign: TextAlign.center,
                                 ),
                               )
@@ -157,10 +158,18 @@ class Page3 extends State<MainPage3>{
                             child:
                               Row(
                                 children: [
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                                  ),
                                   hours(),
                                   Container(
-                                    margin: EdgeInsets.fromLTRB(10, 0, 5, 0),
+                                    margin: EdgeInsets.fromLTRB(10, 0, 15, 0),
                                     child: Text("시간", style: TextStyle(fontWeight: FontWeight.bold),),
+                                  ),
+                                  minutes(),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    child: Text("분", style: TextStyle(fontWeight: FontWeight.bold),),
                                   ),
                                 ],
                               ),
@@ -171,7 +180,19 @@ class Page3 extends State<MainPage3>{
                         child:
                           Container(
                             height: 40,
-                            color: Colors.green,
+                            child:
+                              Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(11, 0, 0, 0),
+                                  ),
+                                  minutes(),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    child: Text("분", style: TextStyle(fontWeight: FontWeight.bold),),
+                                  ),
+                                ],
+                              ),
                           ),
                       ),
                     ],
