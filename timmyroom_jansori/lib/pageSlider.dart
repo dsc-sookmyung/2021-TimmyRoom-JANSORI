@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'testPage.dart';
+import 'HelpSection.dart';
+import 'startPage.dart';
 import 'alarmList.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,8 +18,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // title appBar랑 actions은 같이..
+      /*
       appBar: AppBar(title: Text('page view'),
-
       // curve 바꾸면 different action
       actions: [
         IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
         }),
       ],
       ),
+       */
       body: PageView(
         //pageSnapping: true,
         controller: pageController,
@@ -39,10 +41,57 @@ class _HomePageState extends State<HomePage> {
           print(pageChanged);
         },
         children: [
-          Container(color: Colors.indigo),
-          alarmList(),
-          Container(color: Colors.brown),
-          testPage1(),
+          page2(),
+          StartPage(),
+          //HelpSection(),
+          /*
+          Container(
+              height: 400,
+              width: 200,
+              color: Colors.indigo,
+              /*
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.purple, Colors.red],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(24)),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                        children: <Widget>[
+                         Text(
+                            'Office',
+                            style: TextStyle(
+                              color: Colors.white, fontFamily: 'abenir'),
+                            ),
+                        ],
+                      ),
+                        Switch(
+                          onChanged: (bool value) {},
+                          value: true,
+                          activeColor: Colors.white,
+                        ),
+                      ],
+                    )
+
+                  ]
+                )
+              )
+
+               */
+          ),
+
+          // TimeCheck(),
+           */
+          // Container(color: Colors.red),
+         // Container(color: Colors.brown),
 
         ],
       )

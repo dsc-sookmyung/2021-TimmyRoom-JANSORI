@@ -5,9 +5,10 @@ import 'package:timmyroom_jansori/models/todo_info.dart';
 
 final String tableName = 'toDos';
 final String colId = 'id';
-final String colName = 'name';
-final String colDuringTime = 'duringTime';
-final String colRestTime = 'restTime';
+String colName = 'name';
+String colDuringTime = 'duringTime';
+String colRestTime = 'restTime';
+String colIsOn = 'isOn';
 
 class DBHelper {
   static Database _database;
@@ -31,7 +32,7 @@ class DBHelper {
 
   Future<Database> initDB() async {
     var dir = await getDatabasesPath();
-    var path = dir + "toDos.db";
+    var path = dir + "toDos1.db";
 
     var database = await openDatabase(
         path,
@@ -39,10 +40,11 @@ class DBHelper {
         onCreate: (db, version) async {
           await db.execute('''
             CREATE TABLE $tableName(
-              'id' INTEGER NOT NULL PRIMARY KEY,
-              'name' TEXT,
-              'duringTime' INTEGER,
-              'restTime' INTEGER
+              $colId INTEGER NOT NULL PRIMARY KEY,
+              $colName TEXT,
+              $colDuringTime INTEGER,
+              $colRestTime INTEGER,
+              $colIsOn INTEGER
               )
             ''');
         },
@@ -55,6 +57,11 @@ class DBHelper {
     final db = await database;
     var res = await db.insert(tableName, todoInfo.toMap());
     print('db 저장된 갯수: $res');
+  }
+
+  updateIsOn(int id, int value) async {
+    final db = await database;
+    var res = await db.rawUpdate('UPDATE $tableName SET $colIsOn = ? WHERE $colId = ?', [value, id]);
   }
 
   // read
@@ -86,7 +93,7 @@ class DBHelper {
   // update
   updateToDos(ToDoInfo todos) async {
     final db = await database;
-    var res = db.rawUpdate('UPDATE $tableName SET name = ? WHERE = ?', [todos.name, todos.id]);
+    var res = db.rawUpdate('UPDATE $tableName SET name = ? WHERE id = ?', [todos.name, todos.id]);
     return res;
   }
 }

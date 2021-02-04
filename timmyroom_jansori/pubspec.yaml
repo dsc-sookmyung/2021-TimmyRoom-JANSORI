@@ -31,9 +31,11 @@ dependencies:
 
 dev_dependencies:
 
+  audioplayers: ^0.7.8
+  gradient_app_bar: ^0.0.1
   flutter_local_notifications: ^1.4.4+2
   sqflite: ^1.3.0
-  path_provider: ^1.2.0
+  path_provider: ^0.4.1
   path: ^1.6.2
   intl: ^0.16.1
   flutter_test:
@@ -51,9 +53,13 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  assets:
-    - images/on.png
-    - images/off.png
+  assets :
+    - images/
+    - assets/click1.mp3
+    - images/sound_on.png
+    - images/sound_off.png
+    - images/sound_off2.png
+    - images/sound_off3.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
