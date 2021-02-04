@@ -8,6 +8,7 @@ import 'free.dart';
 import 'DBHelper.dart';
 import './models/todo_info.dart';
 import 'startPage.dart';
+import 'pageSlider.dart';
 
 // import 'year_month_day_time_picker.dart';
 
@@ -84,7 +85,7 @@ class Page3 extends State<MainPage3>{
     );
     _dbHelper.insertToDo(todoInfo);
     print(colName);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => StartPage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
   }
 
   Widget submitButton(){

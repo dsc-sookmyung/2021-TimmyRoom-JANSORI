@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'pageSlider.dart';
 import 'startPage.dart';
 
-import 'page3.dart';
-
 void main() {
   runApp(MyApp());
 }

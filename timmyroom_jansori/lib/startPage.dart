@@ -317,11 +317,11 @@ class _StartPageState extends State<StartPage> {
                                   ),
                                 );
                               }).followedBy([
-                                FloatingActionButton.extended(
-                                  onPressed: onSaveToDo,
-                                  icon: Icon(Icons.alarm),
-                                  label: Text('save'),
-                                ),
+                                // FloatingActionButton.extended(
+                                //   onPressed: onSaveToDo,
+                                //   icon: Icon(Icons.alarm),
+                                //   label: Text('save'),
+                                // ),
                               ]).toList()
                           );
                         } else {
