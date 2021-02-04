@@ -8,6 +8,8 @@ import 'models/todo_info.dart';
 import 'DBHelper.dart';
 import 'data.dart';
 import 'theme_data.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class StartPage extends StatefulWidget {
@@ -16,6 +18,7 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
+  AudioCache player=new AudioCache();
   bool toggleValue = false;
   bool isOn = true;
 
@@ -342,6 +345,8 @@ class _StartPageState extends State<StartPage> {
               ),
             ),
         );
+
+
   }
   toggleButton() {
     setState(() {
@@ -355,6 +360,16 @@ class _StartPageState extends State<StartPage> {
   void deleteToDo(int id) {
     _dbHelper.delete(id);
     loadToDos();
+  }
+
+  _incrementCounter() async{ //타이머와 연결시켜야 함!
+    SharedPreferences prefs=await SharedPreferences.getInstance();
+    int counter=(prefs.getInt('counter')??0)+1;
+
+    const alarmAudioPath="wakeup.m4a";
+    player.play(alarmAudioPath);
+
+    await prefs.setInt('counter',counter);
   }
 }
 
