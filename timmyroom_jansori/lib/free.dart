@@ -16,11 +16,12 @@ class _freeState extends State<free>{
   Widget build(BuildContext context) {
     return Directionality(
         textDirection: TextDirection.rtl,
-        child:
-        DropdownButton<String>(
+        child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
           icon: Icon(
             Icons.arrow_drop_down,
           ),
+          iconEnabledColor: Colors.blue,
           value: dropdownValue,
           iconSize: 20,
           elevation: 16,
@@ -44,7 +45,7 @@ class _freeState extends State<free>{
             );
           }).toList(),
         )
-    );
+    ));
 
   }
 }

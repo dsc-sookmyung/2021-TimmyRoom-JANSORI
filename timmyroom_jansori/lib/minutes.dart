@@ -16,13 +16,14 @@ class _minutesState extends State<minutes>{
   Widget build(BuildContext context) {
     return Directionality(
         textDirection: TextDirection.rtl,
-        child:
-        DropdownButton<String>(
+        child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
           icon: Icon(
             Icons.arrow_drop_down,
           ),
           value: dropdownValue,
           iconSize: 20,
+          iconEnabledColor: Colors.blue,
           elevation: 16,
           style: TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontWeight: FontWeight.w700),
           underline: Container(
@@ -49,7 +50,7 @@ class _minutesState extends State<minutes>{
             );
           }).toList(),
         )
-    );
+    ));
 
   }
 }

@@ -215,9 +215,10 @@ class _page2State extends State<page2> {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => MainPage3(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin = Offset(1.5, 0.0); // <-
+        var begin = Offset(0.0, 3.0); // <-
         var end = Offset.zero;
-        var tween = Tween(begin: begin, end: end);
+        var curve = Curves.ease;
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
         var offsetAnimation = animation.drive(tween);
 
         return SlideTransition(
