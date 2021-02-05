@@ -72,10 +72,10 @@ flutter:
     - assets/finish3.m4a
     - assets/study.m4a
     - assets/wakeup.m4a
-    - assets/Study start.m4a
-    - assets/Study end.m4a
-    - assets/Rest start.m4a
-    - assets/Rest end.m4a
+    - assets/1.m4a
+    - assets/2.m4a
+    - assets/3.m4a
+    - assets/4.m4a
 
 
   # To add assets to your application, add an assets section, like this:

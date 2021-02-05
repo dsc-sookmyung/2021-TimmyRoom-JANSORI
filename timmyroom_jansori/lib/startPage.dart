@@ -484,7 +484,7 @@ class _StartPageState extends State<StartPage> {
     );
 
     // 휴식 시작오디오
-    var startAudioPath="Rest Start.m4a";
+    var startAudioPath="3.m4a";
     player.play(startAudioPath);
 
     var restTimer = countdownTimer.listen(null);
@@ -497,7 +497,7 @@ class _StartPageState extends State<StartPage> {
     restTimer.onDone(() {
       print("   TIMES UP!   ");
       // 휴식 시간 끝
-      var alarmAudioPath="Rest end.m4a";
+      var alarmAudioPath="4.m4a";
       player.play(alarmAudioPath);
       restTimer.cancel();
     });
@@ -512,7 +512,7 @@ class _StartPageState extends State<StartPage> {
     );
 
     // 학습   시작하면 시작했다고 알려주
-    var startAudioPath="Study start.m4a";
+    var startAudioPath="1.m4a";
     player.play(startAudioPath);
 
     var duringTimer = countdownTimer.listen(null);
@@ -525,7 +525,7 @@ class _StartPageState extends State<StartPage> {
     duringTimer.onDone(() {
       print("   TIMES UP!   ");
       // 학습시간 끝
-      var alarmAudioPath="Study end.m4a";
+      var alarmAudioPath="2.m4a";
       player.play(alarmAudioPath);
       restStartTimer(rstart, rcurrent);
       duringTimer.cancel();
