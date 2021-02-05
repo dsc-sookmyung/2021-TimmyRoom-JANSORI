@@ -139,9 +139,10 @@ class Page3 extends State<MainPage3>{
                                                     print(todo.id);
                                                   },
                                                   child: Container(
+                                                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0.05),
                                                       height: 30,
                                                       decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(26),
+                                                        borderRadius: BorderRadius.circular(10),
                                                         gradient: LinearGradient(
                                                           colors: [Color(0xFF61A3FE).withOpacity(0.5), Color(0xFF63FFD5).withOpacity(0.5)],
                                                           begin: Alignment.centerLeft,
@@ -149,14 +150,14 @@ class Page3 extends State<MainPage3>{
                                                         ),
                                                         boxShadow: [
                                                           BoxShadow(
-                                                              color: Colors.white.withOpacity(0.2),
-                                                              blurRadius: 1,
+                                                              color: Colors.white.withOpacity(0.1),
+                                                              blurRadius: 0.05,
                                                               spreadRadius: 2,
                                                               offset: Offset(0, 1)),
                                                         ],
                                                       ),
                                                       child : Row (
-                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          mainAxisAlignment: MainAxisAlignment.center,
                                                           children: <Widget>[
                                                             Text("잔소리 이름 #${todo.id}"),
                                                             Container(color: Colors.red),
@@ -175,8 +176,9 @@ class Page3 extends State<MainPage3>{
                                                 },
 
                                                 child: Container(
-                                                  decoration:
-                                                  BoxDecoration(
+                                                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0.05),
+                                                  height: 30,
+                                                  decoration: BoxDecoration(
                                                     //color: Colors.white.withOpacity(0.1),
                                                     gradient: LinearGradient(colors: [Color(0xFFFFA738).withOpacity(0.3), Color(0xFFFFE130).withOpacity(0.3)], begin: Alignment.bottomCenter, end: Alignment.topCenter,),
                                                     border: Border.all(width: 1, color: Colors.grey.withOpacity(0.1),),
@@ -184,7 +186,7 @@ class Page3 extends State<MainPage3>{
                                                       Radius.circular(40),
                                                     ),
                                                   ),
-                                                  child : Text("RECORDING"),
+                                                  child : Center(child: Text("RECORDING")),
                                                 ),
                                               ),
                                             ]).toList()
