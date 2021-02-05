@@ -10,6 +10,7 @@ String colDuringTime = 'duringTime';
 String colRestTime = 'restTime';
 String colIsOn = 'isOn';
 
+
 class DBHelper {
   static Database _database;
   static DBHelper _dbHelper;

@@ -9,6 +9,8 @@ import 'DBHelper.dart';
 import 'data.dart';
 import 'theme_data.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class StartPage extends StatefulWidget {
@@ -17,6 +19,7 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
+  AudioCache player=new AudioCache();
   bool toggleValue = false;
   bool isOn = true;
 
@@ -385,13 +388,15 @@ class _StartPageState extends State<StartPage> {
               ),
             ),
         );
+
+
   }
   toggleButton() {
     setState(() {
       toggleValue = !toggleValue;
     });
   }
-
+  
   List names=["모델 돌리기","코딩하기","실컷 놀기","커피 먹기"];
   List isOns=[0,0,0,0];
   List duringTimes=[10,20,30,40];
@@ -424,5 +429,15 @@ class _StartPageState extends State<StartPage> {
       offset: Offset(5,5),
       blurRadius: 30),
   ];
+
+  _incrementCounter() async{ //타이머와 연결시켜야 함!
+    SharedPreferences prefs=await SharedPreferences.getInstance();
+    int counter=(prefs.getInt('counter')??0)+1;
+
+    const alarmAudioPath="wakeup.m4a";
+    player.play(alarmAudioPath);
+
+    await prefs.setInt('counter',counter);
+  }
 }
 

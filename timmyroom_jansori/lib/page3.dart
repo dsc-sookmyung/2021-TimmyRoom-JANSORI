@@ -1,0 +1,329 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import 'hours.dart';
+import 'minutes.dart';
+import 'free.dart';
+
+import 'DBHelper.dart';
+import './models/todo_info.dart';
+import 'startPage.dart';
+import 'pageSlider.dart';
+
+// import 'year_month_day_time_picker.dart';
+
+class MainPage3 extends StatefulWidget{
+  Page3 createState()=> Page3();
+}
+
+class Page3 extends State<MainPage3>{
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+        home: home()
+    );
+  }
+
+  Widget home(){
+    return Scaffold(
+      body: popup(),
+    );
+  }
+
+  Widget popup(){
+    return Center(
+      child:
+      Container(
+        width: 285,
+        height: 500,
+        decoration:
+        BoxDecoration(
+          border: Border.all(
+            width: 0.8,
+            color: Color.fromRGBO(93, 136, 248, 0.8),
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(5),
+          ),
+        ),
+        child:
+        Container(
+          width: 255,
+          margin: EdgeInsets.all(15),
+          child:
+          Form(
+            key: _formKey,
+            child:
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                timeSetting(),
+                nameSetting(),
+                jansoriSetting(),
+                submitButton(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  submit() {
+    final FormState form = _formKey.currentState;
+
+    form.save();
+    print('saved $colDuringTime, $colRestTime, $colName.');
+
+    DBHelper _dbHelper = DBHelper();
+    var todoInfo = ToDoInfo(
+      name: colName,
+      duringTime: int.parse(colDuringTime),
+      restTime: int.parse(colRestTime),
+    );
+    _dbHelper.insertToDo(todoInfo);
+    print(colName);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+  }
+
+  Widget submitButton(){
+    return Column(
+      children: [
+        SizedBox(height: 10.0),
+        MaterialButton(
+          onPressed: submit,
+          color: Color.fromRGBO(93, 136, 248, 1),
+          textColor: Colors.white,
+          padding: EdgeInsets.symmetric(
+            horizontal: 94.0,
+            vertical: 10.0,
+          ),
+          child: Text(
+            'Submit',
+            style: TextStyle(fontSize: 20.0),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget timeSetting(){
+
+    return Container(
+      width: 255,
+      margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
+      child:
+      Container(
+        child:
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 16),
+              child:
+              Text(
+                "시간 설정",
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontStyle: FontStyle.normal,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromRGBO(4, 4, 7, 0.7),
+                  // color: Color.fromRGBO(56, 110, 218, 1),
+                  height: 1.4,
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child:
+                  Container(
+                    height: 20,
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                      child:
+                      Text(
+                        "집중 타임(시간)",
+                        style: TextStyle(fontSize: 12, color: Color.fromRGBO(28, 88, 245, 1)),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child:
+                  Container(
+                      height: 20,
+                      // color: Colors.amber,
+                      child: Container(
+                        child:
+                        Text(
+                          "휴식 타임(분)",
+                          style: TextStyle(fontSize: 12, color: Color.fromRGBO(28, 88, 245, 1)),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child:
+                  Container(
+                    height: 40,
+                    //color: Colors.amber,
+                    child:
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                        ),
+                        hours(),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 15, 0),
+                          child: Text("시간", style: TextStyle(fontWeight: FontWeight.bold),),
+                        ),
+                        minutes(),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: Text("분", style: TextStyle(fontWeight: FontWeight.bold),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child:
+                  Container(
+                    height: 40,
+                    child:
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(11, 0, 0, 0),
+                        ),
+                        free(),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: Text("분", style: TextStyle(fontWeight: FontWeight.bold),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget nameSetting(){
+    FocusNode myFocusNode = new FocusNode();
+
+    return Container(
+      child:
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            child:
+            Text(
+              "이름 설정",
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontStyle: FontStyle.normal,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: Color.fromRGBO(4, 4, 7, 0.7),
+                height: 1.4,
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            child:
+            TextFormField(
+              focusNode: myFocusNode,
+              style: TextStyle(
+                color: Color.fromRGBO(0, 0, 0, 1),
+              ),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '일정 이름을 입력해주세요',
+                labelStyle: TextStyle(
+                  fontSize: 13,
+                  color: myFocusNode.hasFocus ? Color.fromRGBO(56, 110, 218, 1) : Color.fromRGBO(4, 4, 7, 0.7),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color.fromRGBO(56, 110, 218, 1)),
+                ),
+              ),
+              onSaved: (val) => colName = val,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget jansoriSetting(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+          child:
+          Text(
+            "잔소리 설정",
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontStyle: FontStyle.normal,
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+              color: Color.fromRGBO(4, 4, 7, 0.7),
+              height: 1.4,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+          height: 130,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Color.fromRGBO(4, 4, 7, 0.35),
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(3)),
+          ),
+          child:
+          jansoriList(),
+        ),
+      ],
+    );
+  }
+
+  Widget jansoriList () {
+    List<String> items = List.generate(10, (i) => 'jansori #$i');
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, i) {
+        return ListTile(
+            title: Text(items[i]),
+            subtitle: Text('this is jansori $i')
+        );
+      },
+    );
+  }
+
+
+}

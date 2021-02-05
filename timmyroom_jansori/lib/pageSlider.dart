@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'HelpSection.dart';
 import 'startPage.dart';
 import 'alarmList.dart';
+import 'startPage.dart';
+import 'page3.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -43,56 +45,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           page2(),
           StartPage(),
-          //HelpSection(),
-          /*
-          Container(
-              height: 400,
-              width: 200,
-              color: Colors.indigo,
-              /*
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.purple, Colors.red],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(24)),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                        children: <Widget>[
-                         Text(
-                            'Office',
-                            style: TextStyle(
-                              color: Colors.white, fontFamily: 'abenir'),
-                            ),
-                        ],
-                      ),
-                        Switch(
-                          onChanged: (bool value) {},
-                          value: true,
-                          activeColor: Colors.white,
-                        ),
-                      ],
-                    )
-
-                  ]
-                )
-              )
-
-               */
-          ),
-
-          // TimeCheck(),
-           */
-          // Container(color: Colors.red),
-         // Container(color: Colors.brown),
-
+          MainPage3(),
         ],
       )
     );
