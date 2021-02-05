@@ -414,8 +414,6 @@ class _StartPageState extends State<StartPage> {
         isOn: isOns[i],
       );
       _dbHelper.insertToDo(todoInfo);
-
-      print("저장저장  $num");
       loadToDos();
     }
   }
