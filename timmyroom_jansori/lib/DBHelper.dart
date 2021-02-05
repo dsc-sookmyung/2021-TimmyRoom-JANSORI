@@ -33,7 +33,7 @@ class DBHelper {
 
   Future<Database> initDB() async {
     var dir = await getDatabasesPath();
-    var path = dir + "toDos1.db";
+    var path = dir + "toDos2.db";
 
     var database = await openDatabase(
         path,
