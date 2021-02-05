@@ -86,8 +86,14 @@ class _StartPageState extends State<StartPage> {
       backgroundColor: Color.fromRGBO(44, 44, 84, 1.0),
         appBar: GradientAppBar(
           elevation: 0, // 앱바 그림자 없애기
-          title: Text('Jansori',
-            style: TextStyle(color: Colors.white.withOpacity(0.8)),),
+          title: Text('JANSORI',
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.7),
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
           centerTitle : true,
           backgroundColorStart: Colors.white.withOpacity(0.1),
           backgroundColorEnd: Colors.white.withOpacity(0.0),
@@ -111,7 +117,7 @@ class _StartPageState extends State<StartPage> {
         child: Column(
         children: <Widget>[
         // 여백
-        SizedBox(height: 70,),
+        SizedBox(height:100,),
       // **************** 원 두개
       Padding(
 
@@ -146,19 +152,19 @@ class _StartPageState extends State<StartPage> {
                 //mainAxisAlignment: MainAxisAlignment.center,
                 //crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 60,),
+                  SizedBox(height: 85,),
                   Text(
                     clickedName,
                     style: TextStyle(
                       color: Colors.black26,
-                      fontSize: 15,
+                      fontSize: 18,
                     ),
                   ),
                   Text(
                     "START",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
+                      fontSize: 35,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
                     ),
@@ -169,8 +175,8 @@ class _StartPageState extends State<StartPage> {
 
             //************* 테두리
             // 큰 원을 그린다
-            height: 220,
-            width: 220,
+            height: 260,
+            width: 260,
 
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -195,63 +201,12 @@ class _StartPageState extends State<StartPage> {
           ),
         ),
       ),
-      SizedBox(height: 20,),
-      /* 토글 바
-                  AnimatedContainer(
-                      duration: Duration(milliseconds: 500),
-                      height: 35.0,
-                      width: 80.0,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: toggleValue ? Colors.blueGrey.withOpacity(0.4) :
-                          Colors.black12
-                      ),
-                      child: Stack(
-                          children: <Widget>[
-                            AnimatedPositioned(
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.linear,
-                                top: 2.5,
-                                left: toggleValue ? 40.0 : 0.0,
-                                right: toggleValue ? 0.0 : 40.0,
-                                child: InkWell(
-                                  onTap: toggleButton,
-                                  child: AnimatedSwitcher(
-                                    duration: Duration(milliseconds: 500),
-                                    transitionBuilder:
-                                        (Widget child, Animation<double> animation) {
-                                      return SlideTransition(
-                                          position: Tween(
-                                            begin: Offset(0.0,0.0),
-                                            end: Offset(0.0,0.0))
-                                              .animate(animation),
-                                        child: child
-                                      );
-                                      //return RotationTransition(child: child, turns: animation);
-                                    },
-
-
-                                    child: toggleValue?
-                                    (Icon(Icons.check_circle, color: Colors.blueGrey, size: 30.0,
-                                    key: UniqueKey())
-                                    )
-                                    :
-                                    Icon(Icons.remove_circle_outline, color: Colors.red, size: 30.0,
-                                    key: UniqueKey())
-                                  ),
-                                )
-                            )
-                          ]
-                      )
-                  ),
-
-                  SizedBox(height:5,),
-                   */
+      SizedBox(height: 40,),
 
       // ***************** 토글바
       Container(
         height: 55,
-        width: 130,
+        width: 140,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(50)),
             gradient: LinearGradient(
@@ -296,8 +251,8 @@ class _StartPageState extends State<StartPage> {
                         SizedBox(width: 16),
                         // Icon( Icons.block, color:Colors.grey, size:25),
                         SizedBox(width: 8),
-                        Text("help",
-                            style: TextStyle(color:Colors.white)),
+                        Text("BLOCK",
+                            style: TextStyle(color:Colors.white.withOpacity(0.9))),
                         Switch(
                           value: isOn,
                           onChanged: (bool value) {
@@ -316,7 +271,7 @@ class _StartPageState extends State<StartPage> {
           ),
         ),
       ),
-      SizedBox(height: 50,),
+      SizedBox(height: 70,),
       // list view 그 .. 내 할일 목록이요
 
       Expanded(
@@ -329,6 +284,7 @@ class _StartPageState extends State<StartPage> {
                 Text("할일을 추가해주세요");
               }
               return ListView(
+                  padding: EdgeInsets.only(left:60),
                   scrollDirection: Axis.horizontal,
                   children: snapshot.data.map<Widget>((todo) {
                     return GestureDetector(
@@ -339,7 +295,7 @@ class _StartPageState extends State<StartPage> {
                         print(clickedName);
                       },
                       child: Container(
-                          margin: const EdgeInsets.only(bottom: 50, left: 32, right: 32),
+                          margin: const EdgeInsets.only(bottom: 50, left: 20, right: 20),
                           //padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           width: 250,
                           decoration: BoxDecoration(
@@ -369,7 +325,8 @@ class _StartPageState extends State<StartPage> {
                                     //boxShadow: customShadow,
                                       shape: BoxShape.circle, color:Colors.white.withOpacity(0.1)),)),
                               Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   SizedBox(height: 16,),
                                   Row(
