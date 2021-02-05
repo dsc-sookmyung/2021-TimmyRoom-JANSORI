@@ -3,6 +3,8 @@ import 'theme_data.dart';
 import 'package:timmyroom_jansori/models/todo_info.dart';
 import 'models/todo_info.dart';
 import 'DBHelper.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'page3.dart';
 
 class page2 extends StatefulWidget {
   @override
@@ -54,12 +56,13 @@ class _page2State extends State<page2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      backgroundColor: Colors.white.withOpacity(0.1),
-      elevation: 0, // 앱바 그림자 없애기
-      title: Text('List',
-        style: TextStyle(color: Colors.white.withOpacity(0.8)),),
-      centerTitle : true,
+      appBar: GradientAppBar(
+        elevation: 0, // 앱바 그림자 없애기
+        title: Text('list',
+          style: TextStyle(color: Colors.white.withOpacity(0.8)),),
+        centerTitle : true,
+        backgroundColorStart: Colors.white.withOpacity(0.0),
+        backgroundColorEnd: Colors.white.withOpacity(0.1),
       ),
       backgroundColor: Color.fromRGBO(44, 44, 84, 1.0),
       body: SafeArea(
@@ -191,7 +194,15 @@ class _page2State extends State<page2> {
                             ),
                           ),
                         );
-                      }).toList());
+                      }).followedBy([
+                          FloatingActionButton.extended(
+                            onPressed: onSaveToDo,
+                            icon: Icon(Icons.alarm),
+                            label: Text('save'),
+                          ),
+                        ]).toList()
+                      );
+
                     } else {
                       return CircularProgressIndicator();
                     }
@@ -209,7 +220,10 @@ class _page2State extends State<page2> {
   void onUpdateIsOn(int id, int value){
     _dbHelper.updateIsOn(id, value);
     loadToDos();
-
+  }
+  onSaveToDo() {
+    print("팝업창나와라");
+    return MainPage3();
   }
 }
 
