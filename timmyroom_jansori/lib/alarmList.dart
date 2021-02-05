@@ -6,7 +6,7 @@ import 'package:timmyroom_jansori/models/todo_info.dart';
 import 'models/todo_info.dart';
 import 'DBHelper.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'page3.dart';
+
 
 class page2 extends StatefulWidget {
   @override

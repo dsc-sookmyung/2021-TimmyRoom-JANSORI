@@ -108,21 +108,22 @@ class Page3 extends State<MainPage3>{
                             Text(
                               "잔소리 설정",
                               style: TextStyle(
+                                color: Colors.white,
                                 fontFamily: 'Roboto',
                                 fontStyle: FontStyle.normal,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
-                                color: Colors.white,
                                 height: 1.4,
                               ),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                            height: 130,
+                            height: 160,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Color.fromRGBO(4, 4, 7, 0.5),
+                                //color: Color.fromRGBO(4, 4, 7, 0.5),
+                                color: Colors.white.withOpacity(0.1),
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(20)),
                             ),
@@ -141,7 +142,7 @@ class Page3 extends State<MainPage3>{
                                                     print(sound.id);
                                                   },
                                                   child: Container(
-                                                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0.05),
+                                                      margin: EdgeInsets.fromLTRB(10, 0.5, 10, 1),
                                                       height: 30,
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(10),
@@ -161,8 +162,9 @@ class Page3 extends State<MainPage3>{
                                                       child : Row (
                                                           mainAxisAlignment: MainAxisAlignment.center,
                                                           children: <Widget>[
-                                                            Text("잔소리 #${sound.id+1}"),
-                                                            Container(color: Colors.red),
+                                                            Text("잔소리 #${sound.id+1}",
+                                                            style: TextStyle( color: Colors.white.withOpacity(0.9))),
+                                                            
                                                           ]
                                                       )
                                                   )
@@ -177,7 +179,7 @@ class Page3 extends State<MainPage3>{
                                                   print("녹음 끝");
                                                 },
                                                 child: Container(
-                                                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0.05),
+                                                  margin: EdgeInsets.fromLTRB(10, 1, 10, 0.05),
                                                   height: 30,
                                                   decoration: BoxDecoration(
                                                     //color: Colors.white.withOpacity(0.1),
@@ -187,7 +189,10 @@ class Page3 extends State<MainPage3>{
                                                       Radius.circular(40),
                                                     ),
                                                   ),
-                                                  child : Center(child: Text("RECORDING")),
+                                                  child : Center(child:
+                                                  Text("RECORDING",
+                                                    style: TextStyle(color: Colors.white.withOpacity(0.8)),)
+                                                  ),
                                                 ),
                                               ),
                                             ]).toList()
@@ -236,19 +241,30 @@ class Page3 extends State<MainPage3>{
     return Column(
       children: [
         SizedBox(height: 10.0),
-        MaterialButton(
-          onPressed: submit,
-          color: Color.fromRGBO(93, 136, 248, 1),
-          textColor: Colors.white,
-          padding: EdgeInsets.symmetric(
-            horizontal: 94.0,
-            vertical: 10.0,
+        GestureDetector(
+          onTap: (){
+            submit();
+        },
+          child : Container(
+            width: 260,
+            height: 50,
+            decoration:
+              BoxDecoration(
+              gradient: LinearGradient(colors: [Color(0xFFFE6197).withOpacity(0.3), Color(0xFFFFB463).withOpacity(0.2)], begin: Alignment.bottomCenter, end: Alignment.topCenter,),
+              border: Border.all(
+              width: 1,
+              color: Colors.black.withOpacity(0.1),
+          // color: Color.fromRGBO(93, 136, 248, 0.8),
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(20),),
+              ),
+              child: Center(
+                child: Text('Submit',style: TextStyle
+                (fontSize: 20.0,color:Colors.white.withOpacity(0.8),
+                    fontWeight: FontWeight.bold),),
+              ),
+            ),
           ),
-          child: Text(
-            'Submit',
-            style: TextStyle(fontSize: 20.0),
-          ),
-        ),
       ],
     );
   }
@@ -293,22 +309,23 @@ class Page3 extends State<MainPage3>{
                     Container(
                       decoration:
                       BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
+                        //color: Colors.white.withOpacity(0.1),
                         //gradient: LinearGradient(colors: [Color(0xFFFFA738).withOpacity(0.3), Color(0xFFFFE130).withOpacity(0.3)], begin: Alignment.bottomCenter, end: Alignment.topCenter,),
                         border: Border.all(
-                          width: 1,
-                          color: Colors.grey.withOpacity(0.1),
-                          // color: Color.fromRGBO(93, 136, 248, 0.8),
-                        ),
+                        width: 3,
+                        color: Colors.grey.withOpacity(0.2),
+                        // color: Color.fromRGBO(93, 136, 248, 0.8),
+                      ),
                         borderRadius: BorderRadius.all(
                           Radius.circular(40),
                         ),
                       ),
                       height: 70,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                            margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
                             child:
                             Text(
                               "집중 타임",
@@ -355,11 +372,11 @@ class Page3 extends State<MainPage3>{
                         height: 70,
                         decoration:
                         BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
+                          //color: Colors.white.withOpacity(0.1),
                           //gradient: LinearGradient(colors: [Color(0xFFFFA738).withOpacity(0.3), Color(0xFFFFE130).withOpacity(0.3)], begin: Alignment.bottomCenter, end: Alignment.topCenter,),
                           border: Border.all(
-                            width: 1,
-                            color: Colors.grey.withOpacity(0.1),
+                            width: 2,
+                            color: Colors.grey.withOpacity(0.2),
                             // color: Color.fromRGBO(93, 136, 248, 0.8),
                           ),
                           borderRadius: BorderRadius.all(
@@ -439,11 +456,12 @@ class Page3 extends State<MainPage3>{
             TextFormField(
               focusNode: myFocusNode,
               style: TextStyle(
-                color: Color.fromRGBO(0, 0, 0, 1),
+                //color: Color.fromRGBO(0, 0, 0, 1),
+                  color: Colors.white.withOpacity(0.8),
               ),
               decoration: InputDecoration(
-                fillColor: Colors.red,
-                focusColor: Colors.red,
+                fillColor: Colors.white,
+                focusColor: Colors.white,
 
                 border: OutlineInputBorder(),
                 labelText: '일정 이름을 입력해주세요',
