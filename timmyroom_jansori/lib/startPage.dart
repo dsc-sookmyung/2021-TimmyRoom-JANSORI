@@ -11,6 +11,7 @@ import 'theme_data.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:quiver/async.dart';
 
 
 class StartPage extends StatefulWidget {
@@ -30,6 +31,9 @@ class _StartPageState extends State<StartPage> {
   var fire = GradientTemplate.gradientTemplate[4].colors;
 
   String clickedName = "할 일을 선택해주세요";
+
+  int _start;
+  int _end;
 
   DBHelper _dbHelper = DBHelper();
   Future<List<ToDoInfo>> _toDos;
@@ -75,7 +79,7 @@ class _StartPageState extends State<StartPage> {
                     child:GestureDetector(
                         onTap: (){
                           print("STRRT 클릭");
-                          _incrementCounter();
+                          startTimer(5,5);
                         },
                       child: Container(
                         // *********** 하얀 작은 원
@@ -119,6 +123,7 @@ class _StartPageState extends State<StartPage> {
                             ],
                           ),
                         ),
+
                         //************* 테두리
                         // 큰 원을 그린다
                         height: 220,
@@ -255,7 +260,6 @@ class _StartPageState extends State<StartPage> {
                                       onChanged: (bool value) {
                                         setState(() {
                                           isOn = value;
-                                          print(isOn);
                                         });
                                       },
                                       activeTrackColor: Colors.black.withOpacity(0.2),
@@ -278,7 +282,6 @@ class _StartPageState extends State<StartPage> {
                       builder: (context, snapshot,) {
                         if (snapshot.hasData) {
                           _currentToDos = snapshot.data;
-                          print(_currentToDos.length);
                           if(_currentToDos.length == 0){
                             Text("할일을 추가해주세요");
                           }
@@ -312,7 +315,8 @@ class _StartPageState extends State<StartPage> {
                                       ],
                                       borderRadius: BorderRadius.all(Radius.circular(24)),
                                     ),
-                                    child: Stack(children: <Widget>[
+                                    child: Stack(
+                                      children: <Widget>[
                                       Positioned.fill(
                                           right: -10,
                                           left: 150,
@@ -450,5 +454,30 @@ class _StartPageState extends State<StartPage> {
 
     await prefs.setInt('counter',counter);
   }
+
+  void startTimer(int start, int current) {
+    print("ㅏㅇ미ㅓ시작 ");
+    CountdownTimer countdownTimer = new CountdownTimer(
+      new Duration(seconds: start),
+      new Duration(seconds: 1),
+    );
+
+    var time = countdownTimer.listen(null);
+    time.onData((duration) {
+      setState(() {
+        current = start - duration.elapsed.inSeconds;
+      });
+    });
+
+    time.onDone(() {
+      print("   TIMES UP!   ");
+      _incrementCounter();
+      time.cancel();
+    });
+
+  }
+
+
+
 }
 

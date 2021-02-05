@@ -20,83 +20,176 @@ class MainPage3 extends StatefulWidget{
 
 class Page3 extends State<MainPage3>{
   final _formKey = GlobalKey<FormState>();
+
   var sky = GradientTemplate.gradientTemplate[0].colors;
   var sunset = GradientTemplate.gradientTemplate[1].colors;
   var sea = GradientTemplate.gradientTemplate[2].colors;
   var mango = GradientTemplate.gradientTemplate[3].colors;
   var fire = GradientTemplate.gradientTemplate[4].colors;
 
-  @override
-  Widget build(BuildContext context){
-    return MaterialApp(
-        home: home()
-    );
+  DBHelper _dbHelper = DBHelper();
+  Future<List<ToDoInfo>> _toDos;
+  List<ToDoInfo> _currentToDos;
+
+  void initState(){
+    // print(_dbHelper.database); Future<Database>
+    _dbHelper.initDB().then((value) {
+      print('-----------page3 DB OK---------');
+      loadToDos();
+    });
+    super.initState();
   }
 
-  Widget home(){
+  void loadToDos() {
+    _toDos = _dbHelper.getToDos();
+    if (mounted) setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: Color.fromRGBO(44, 44, 84, 1.0),
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(child: popup()),
-    );
-  }
-
-  Widget popup(){
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 100,),
-              Container(
-                width: 300,
-                height: 520,
-                decoration:
-                BoxDecoration(
-                  //color: Colors.white.withOpacity(0.1),
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF6448FE).withOpacity(0.2), Color(0xFF5FC6FF).withOpacity(0.3)],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0xFF6448FE).withOpacity(0.2),
-                      spreadRadius: 10, // 그림자 진하기 .. ?
-                      blurRadius: 7, // 그림자 얼마나  blur
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                  border: Border.all(
-                    width: 4,
-                    color: Colors.grey.withOpacity(0.1),
-                    // color: Color.fromRGBO(93, 136, 248, 0.8),
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
-                  ),
-                ),
-                child:
+      body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 100,),
                 Container(
-                  width: 255,
-                  margin: EdgeInsets.all(15),
+                  width: 300,
+                  height: 620,
+                  decoration:
+                  BoxDecoration(
+                    //color: Colors.white.withOpacity(0.1),
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF6448FE).withOpacity(0.2), Color(0xFF5FC6FF).withOpacity(0.3)],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xFF6448FE).withOpacity(0.2),
+                        spreadRadius: 10, // 그림자 진하기 .. ?
+                        blurRadius: 7, // 그림자 얼마나  blur
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                    border: Border.all(
+                      width: 4,
+                      color: Colors.grey.withOpacity(0.1),
+                      // color: Color.fromRGBO(93, 136, 248, 0.8),
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
                   child:
-                  Form(
-                    key: _formKey,
+                  Container(
+                    width: 255,
+                    margin: EdgeInsets.all(15),
                     child:
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        timeSetting(),
-                        nameSetting(),
-                        jansoriSetting(),
-                        submitButton(),
-                      ],
+                    Form(
+                      key: _formKey,
+                      child:
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          timeSetting(),
+                          nameSetting(),
+                          /// 여기에 들어가야한다.
+                          ///
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 20, 0, 15),
+                            child:
+                            Text(
+                              "잔소리 설정",
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontStyle: FontStyle.normal,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                                height: 1.4,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            height: 130,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                Expanded(
+                                  child: FutureBuilder<List<ToDoInfo>> (
+                                    future: _toDos,
+                                    builder: (context, snapshot) {
+                                      if(snapshot.hasData){
+                                        _currentToDos = snapshot.data;
+                                        return ListView(
+                                            children: snapshot.data.map<Widget>((todo) {
+                                              return GestureDetector(
+                                                  onTap: () {
+                                                    print(todo.id);
+                                                  },
+                                                  child: Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(26),
+                                                        gradient: LinearGradient(
+                                                          colors: [Color(0xFF61A3FE).withOpacity(0.5), Color(0xFF63FFD5).withOpacity(0.5)],
+                                                          begin: Alignment.centerLeft,
+                                                          end: Alignment.centerRight,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                              color: Colors.white.withOpacity(0.2),
+                                                              blurRadius: 1,
+                                                              spreadRadius: 2,
+                                                              offset: Offset(0, 1)),
+                                                        ],
+                                                      ),
+                                                      child : Row (
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: <Widget>[
+                                                            Text("잔소리 이름 #${todo.id}"),
+                                                            Container(color: Colors.red),
+                                                          ]
+                                                      )
+                                                  )
+                                              );
+                                            }).followedBy([
+                                              FloatingActionButton.extended(
+                                                onPressed: onAudioRecording,
+                                                icon: Icon(Icons.alarm),
+                                                label: Text('save'),
+                                              ),
+                                            ]).toList()
+                                        );
+                                      } else {
+                                        return CircularProgressIndicator();
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            )
+                          ),
+
+                          submitButton(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-        ],
+              ],
+            ),
+          ),
       ),
     );
   }
@@ -141,7 +234,6 @@ class Page3 extends State<MainPage3>{
 
   Widget timeSetting(){
     colDuringTime = 'duringTime';
-
     return Container(
       width: 255,
       margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
@@ -350,54 +442,10 @@ class Page3 extends State<MainPage3>{
     );
   }
 
-  Widget jansoriSetting(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
-          child:
-          Text(
-            "잔소리 설정",
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontStyle: FontStyle.normal,
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
-              height: 1.4,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
-          height: 130,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromRGBO(4, 4, 7, 0.35),
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(3)),
-          ),
-          child:
-          jansoriList(),
-        ),
-      ],
-    );
-  }
 
-  Widget jansoriList () {
-    List<String> items = List.generate(10, (i) => 'jansori #$i');
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, i) {
-        return ListTile(
-            title: Text(items[i]),
-            subtitle: Text('this is jansori $i')
-        );
-      },
-    );
-  }
 
+  onAudioRecording(){
+    print("오디오녹음시작");
+  }
 
 }

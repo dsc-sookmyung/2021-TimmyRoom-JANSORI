@@ -18,8 +18,6 @@ class _page2State extends State<page2> {
   var mango = GradientTemplate.gradientTemplate[3].colors;
   var fire = GradientTemplate.gradientTemplate[4].colors;
 
-  var containerColor = GradientTemplate.gradientTemplate[4].colors;
-
   String _idString;
   String _duringTimeString;
   String _restTimeString;
@@ -28,6 +26,7 @@ class _page2State extends State<page2> {
   DBHelper _dbHelper = DBHelper();
   Future<List<ToDoInfo>> _toDos;
   List<ToDoInfo> _currentToDos;
+
   var _isOn = 1;
 
   void initState(){
@@ -37,15 +36,6 @@ class _page2State extends State<page2> {
       loadToDos();
     });
     super.initState();
-  }
-
-  void _changeONOFF(index){
-    setState(() {
-      switch (index) {
-        case 0:
-
-      }
-    });
   }
 
   void loadToDos() {

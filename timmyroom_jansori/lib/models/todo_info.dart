@@ -7,7 +7,7 @@ class ToDoInfo {
   bool isDuringStart; // 시작했냐
   bool isDuringEnd; // 끝났냐
   bool isRestStart; //
-  bool isRestEnd; // 
+  bool isRestEnd; //
 
   ToDoInfo(
       {this.id,
