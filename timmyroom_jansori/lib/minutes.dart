@@ -33,6 +33,10 @@ class _minutesState extends State<minutes>{
           onChanged: (String newValue) {
             setState(() {
               dropdownValue = newValue;
+              if(colDuringTime == 'duringTime'){
+                colDuringTime = '0';
+                print(colDuringTime);
+              }
               var a = int.parse(colDuringTime) + int.parse(newValue);
               colDuringTime = a.toString();
               print('succeeded 2');

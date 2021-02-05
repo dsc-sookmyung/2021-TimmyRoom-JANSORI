@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'theme_data.dart';
+import 'alarmList.dart';
 import 'hours.dart';
+import 'main.dart';
 import 'minutes.dart';
 import 'free.dart';
 
@@ -110,7 +112,7 @@ class Page3 extends State<MainPage3>{
     );
     _dbHelper.insertToDo(todoInfo);
     print(colName);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
   }
 
   Widget submitButton(){
@@ -135,6 +137,7 @@ class Page3 extends State<MainPage3>{
   }
 
   Widget timeSetting(){
+    colDuringTime = 'duringTime';
 
     return Container(
       width: 255,
