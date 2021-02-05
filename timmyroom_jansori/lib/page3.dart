@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:timmyroom_jansori/models/sound_info.dart';
+import 'SoundHelper.dart';
 import 'theme_data.dart';
 import 'alarmList.dart';
 import 'hours.dart';
 import 'main.dart';
 import 'minutes.dart';
 import 'free.dart';
-
+import 'data.dart';
 import 'DBHelper.dart';
 import './models/todo_info.dart';
 import 'startPage.dart';
@@ -27,21 +29,21 @@ class Page3 extends State<MainPage3>{
   var mango = GradientTemplate.gradientTemplate[3].colors;
   var fire = GradientTemplate.gradientTemplate[4].colors;
 
-  DBHelper _dbHelper = DBHelper();
-  Future<List<ToDoInfo>> _toDos;
-  List<ToDoInfo> _currentToDos;
+  SoundHelper _dbHelper = SoundHelper();
+  Future<List<SoundInfo>> _sounds; // _toDOs
+  List<SoundInfo> _currentSounds; // _currentToDos
 
   void initState(){
     // print(_dbHelper.database); Future<Database>
     _dbHelper.initDB().then((value) {
       print('-----------page3 DB OK---------');
-      loadToDos();
+      loadSounds();
     });
     super.initState();
   }
 
-  void loadToDos() {
-    _toDos = _dbHelper.getToDos();
+  void loadSounds() {
+    _sounds = _dbHelper.getSounds();
     if (mounted) setState(() {});
   }
 
@@ -127,16 +129,16 @@ class Page3 extends State<MainPage3>{
                             child: Column(
                               children: <Widget>[
                                 Expanded(
-                                  child: FutureBuilder<List<ToDoInfo>> (
-                                    future: _toDos,
+                                  child: FutureBuilder<List<SoundInfo>> (
+                                    future: _sounds,
                                     builder: (context, snapshot) {
                                       if(snapshot.hasData){
-                                        _currentToDos = snapshot.data;
+                                        _currentSounds= snapshot.data;
                                         return ListView(
-                                            children: snapshot.data.map<Widget>((todo) {
+                                            children: snapshot.data.map<Widget>((sound) {
                                               return GestureDetector(
                                                   onTap: () {
-                                                    print(todo.id);
+                                                    print(sound.id);
                                                   },
                                                   child: Container(
                                                       margin: EdgeInsets.fromLTRB(10, 0, 10, 0.05),
@@ -159,7 +161,7 @@ class Page3 extends State<MainPage3>{
                                                       child : Row (
                                                           mainAxisAlignment: MainAxisAlignment.center,
                                                           children: <Widget>[
-                                                            Text("잔소리 이름 #${todo.id}"),
+                                                            Text("잔소리 #${sound.id+1}"),
                                                             Container(color: Colors.red),
                                                           ]
                                                       )
@@ -168,7 +170,7 @@ class Page3 extends State<MainPage3>{
                                             }).followedBy([
                                               GestureDetector(
                                                 onTapDown: (TapDownDetails details){
-                                                    //onAudioRecording();
+                                                    onSaveSound();
                                                     print("녹음시작 ");
                                                     },
                                                 onTapUp: (TapUpDetails details){
@@ -461,6 +463,20 @@ class Page3 extends State<MainPage3>{
     );
   }
 
+  void deleteSound(int id){
+      _dbHelper.deleteSound(id);
+      loadSounds();
+  }
+
+  void onSaveSound(){
+    for(int i = 0; i < 4; i++){
+      var soundInfo = SoundInfo(
+        id: i,
+      );
+      _dbHelper.insertSound(soundInfo);
+      loadSounds();
+    }
+  }
 
 
   onAudioRecording(){
