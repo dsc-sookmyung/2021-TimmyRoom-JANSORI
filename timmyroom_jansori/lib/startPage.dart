@@ -32,8 +32,8 @@ class _StartPageState extends State<StartPage> {
 
   String clickedName = "할 일을 선택해주세요";
 
-  int _start;
-  int _end;
+  int _duringTime=5;
+  int _restTime=6;
 
   DBHelper _dbHelper = DBHelper();
   Future<List<ToDoInfo>> _toDos;
@@ -75,11 +75,15 @@ class _StartPageState extends State<StartPage> {
                   SizedBox(height: 70,),
                   // **************** 원 두개
                   Padding(
+
+                    /*  * * ****  * * * * * * * * * *
+                    **     스타트 클릭 >> 타이머 설정
+                    */
                     padding: const EdgeInsets.all(8.0),
                     child:GestureDetector(
                         onTap: (){
                           print("STRRT 클릭");
-                          startTimer(5,5);
+                          duringStartTimer(_duringTime,_duringTime,_restTime,_restTime);
                         },
                       child: Container(
                         // *********** 하얀 작은 원
@@ -455,29 +459,60 @@ class _StartPageState extends State<StartPage> {
     await prefs.setInt('counter',counter);
   }
 
-  void startTimer(int start, int current) {
-    print("ㅏㅇ미ㅓ시작 ");
+  void restStartTimer(int start, int current){
+    print("휴식시작");
     CountdownTimer countdownTimer = new CountdownTimer(
       new Duration(seconds: start),
       new Duration(seconds: 1),
     );
 
-    var time = countdownTimer.listen(null);
-    time.onData((duration) {
+    // 휴식 시작오디오
+    var startAudioPath="Rest Start.m4a";
+    player.play(startAudioPath);
+
+    var restTimer = countdownTimer.listen(null);
+    restTimer.onData((duration) {
       setState(() {
         current = start - duration.elapsed.inSeconds;
       });
     });
 
-    time.onDone(() {
+    restTimer.onDone(() {
       print("   TIMES UP!   ");
-      _incrementCounter();
-      time.cancel();
+      // 휴식 시간 끝
+      var alarmAudioPath="Rest end.m4a";
+      player.play(alarmAudioPath);
+      restTimer.cancel();
     });
-
   }
 
 
+  void duringStartTimer(int dstart, int dcurrent, int rstart, int rcurrent) {
+    print("타이머 시작");
+    CountdownTimer countdownTimer = new CountdownTimer(
+      new Duration(seconds: dstart),
+      new Duration(seconds: 1),
+    );
 
+    // 학습   시작하면 시작했다고 알려주
+    var startAudioPath="Study start.m4a";
+    player.play(startAudioPath);
+
+    var duringTimer = countdownTimer.listen(null);
+    duringTimer.onData((duration) {
+      setState(() {
+        dcurrent = dstart - duration.elapsed.inSeconds;
+      });
+    });
+
+    duringTimer.onDone(() {
+      print("   TIMES UP!   ");
+      // 학습시간 끝
+      var alarmAudioPath="Study end.m4a";
+      player.play(alarmAudioPath);
+      restStartTimer(rstart, rcurrent);
+      duringTimer.cancel();
+    });
+  }
 }
 

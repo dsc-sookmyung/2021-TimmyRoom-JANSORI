@@ -120,7 +120,7 @@ class Page3 extends State<MainPage3>{
                             height: 130,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.red,
+                                color: Color.fromRGBO(4, 4, 7, 0.5),
                               ),
                               borderRadius: BorderRadius.all(Radius.circular(20)),
                             ),
@@ -139,6 +139,7 @@ class Page3 extends State<MainPage3>{
                                                     print(todo.id);
                                                   },
                                                   child: Container(
+                                                      height: 30,
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(26),
                                                         gradient: LinearGradient(
@@ -164,10 +165,27 @@ class Page3 extends State<MainPage3>{
                                                   )
                                               );
                                             }).followedBy([
-                                              FloatingActionButton.extended(
-                                                onPressed: onAudioRecording,
-                                                icon: Icon(Icons.alarm),
-                                                label: Text('save'),
+                                              GestureDetector(
+                                                onTapDown: (TapDownDetails details){
+                                                    //onAudioRecording();
+                                                    print("녹음시작 ");
+                                                    },
+                                                onTapUp: (TapUpDetails details){
+                                                  print("녹음 끝");
+                                                },
+
+                                                child: Container(
+                                                  decoration:
+                                                  BoxDecoration(
+                                                    //color: Colors.white.withOpacity(0.1),
+                                                    gradient: LinearGradient(colors: [Color(0xFFFFA738).withOpacity(0.3), Color(0xFFFFE130).withOpacity(0.3)], begin: Alignment.bottomCenter, end: Alignment.topCenter,),
+                                                    border: Border.all(width: 1, color: Colors.grey.withOpacity(0.1),),
+                                                    borderRadius: BorderRadius.all(
+                                                      Radius.circular(40),
+                                                    ),
+                                                  ),
+                                                  child : Text("RECORDING"),
+                                                ),
                                               ),
                                             ]).toList()
                                         );
