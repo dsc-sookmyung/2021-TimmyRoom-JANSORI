@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-// import "timer.dart";
+import "timer.dart";
 import 'package:carousel_slider/carousel_slider.dart';
 import "theme_data.dart";
 import 'package:timmyroom_jansori/models/todo_info.dart';
@@ -8,6 +8,7 @@ import 'models/todo_info.dart';
 import 'DBHelper.dart';
 import 'data.dart';
 import 'theme_data.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,12 +37,12 @@ class _StartPageState extends State<StartPage> {
 
   @override
   void initState(){
-    print("시작");
     // print(_dbHelper.database); Future<Database>
     _dbHelper.initDB().then((value) {
       print('-----------datata intialized---------');
       loadToDos();
     });
+
     super.initState();
   }
 
@@ -54,12 +55,20 @@ class _StartPageState extends State<StartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(44, 44, 84, 1.0),
+        appBar: GradientAppBar(
+          elevation: 0, // 앱바 그림자 없애기
+          title: Text('Jansori',
+            style: TextStyle(color: Colors.white.withOpacity(0.8)),),
+          centerTitle : true,
+          backgroundColorStart: Colors.white.withOpacity(0.1),
+          backgroundColorEnd: Colors.white.withOpacity(0.0),
+        ),
         body: SafeArea(
             child: Center(
               child: Column(
                 children: <Widget>[
                   // 여백
-                  SizedBox(height: 130,),
+                  SizedBox(height: 70,),
                   // **************** 원 두개
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -67,7 +76,7 @@ class _StartPageState extends State<StartPage> {
                       // *********** 하얀 작은 원
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Colors.white60,
+                            color: Colors.white.withOpacity(0.5),
                             shape: BoxShape.circle,
                             border: Border.all(
                                 color: Colors.black12,
@@ -82,9 +91,10 @@ class _StartPageState extends State<StartPage> {
                             ]
                         ),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          //mainAxisAlignment: MainAxisAlignment.center,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
+                            SizedBox(height: 60,),
                             Text(
                               clickedName,
                               style: TextStyle(
@@ -186,53 +196,74 @@ class _StartPageState extends State<StartPage> {
 
                   // ***************** 토글바
                   Container(
-                    height: 50,
-                    width: 175,
+                    height: 55,
+                    width: 130,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.08),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: sky.first.withOpacity(0.2),
-                          spreadRadius: 7,
-                          blurRadius: 4,
-                          offset:Offset(0,3),
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        gradient: LinearGradient(
+                          colors: sky,
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft,
                         ),
-                      ]
+                        //color: Colors.white.withOpacity(0.9),
+                        boxShadow: [
+                          BoxShadow(
+                            color: sky.last.withOpacity(0.2),
+                            spreadRadius: 7, // 그림자 진하기 .. ?
+                            blurRadius: 4, // 그림자 얼마나  blur
+                            offset: Offset(0, 3),
+                          ),
+                        ]
                     ),
 
-
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                                children: <Widget>[
-                                  SizedBox(width: 8),
-                                  Icon( Icons.block, color:Colors.white, size:25),
-                                  SizedBox(width: 8),
-                                  Text("block mode",
-                                    style: TextStyle(color:Colors.white)),
-                                  Switch(
-                                    value: isOn,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        isOn = value;
-                                        print(isOn);
-                                      });
-                                    },
-                                    activeTrackColor: Colors.grey,
-                                    activeColor: Color(0xFF6448FE),
-                                  ),
-                                ]
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.5),
+                          borderRadius: BorderRadius.all(Radius.circular(60)),
+                          border: Border.all(
+                              color: Colors.black12,
+                              width: 3),
+                          boxShadow: [
+                            BoxShadow(
+                              color: sky.first.withOpacity(0.2),
+                              spreadRadius: 3,
+                              blurRadius: 2,
+                              offset:Offset(0,3),
                             ),
-                          ],
-                        ),
-                      ],
+                          ]
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                  children: <Widget>[
+                                    SizedBox(width: 16),
+                                   // Icon( Icons.block, color:Colors.grey, size:25),
+                                    SizedBox(width: 8),
+                                    Text("help",
+                                      style: TextStyle(color:Colors.white)),
+                                    Switch(
+                                      value: isOn,
+                                      onChanged: (bool value) {
+                                        setState(() {
+                                          isOn = value;
+                                          print(isOn);
+                                        });
+                                      },
+                                      activeTrackColor: Colors.black.withOpacity(0.2),
+                                      activeColor: Colors.deepPurple.withOpacity(0.5),
+                                    ),
+                                  ]
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(height: 80,),
+                  SizedBox(height: 50,),
                   // list view 그 .. 내 할일 목록이요
 
                   Expanded(
@@ -241,7 +272,6 @@ class _StartPageState extends State<StartPage> {
                       builder: (context, snapshot,) {
                         if (snapshot.hasData) {
                           _currentToDos = snapshot.data;
-                          print(snapshot.data);
                           return ListView(
                               scrollDirection: Axis.horizontal,
                               children: snapshot.data.map<Widget>((todo) {
@@ -254,12 +284,11 @@ class _StartPageState extends State<StartPage> {
                                   },
                                   child: Container(
                                     margin: const EdgeInsets.only(bottom: 50, left: 32, right: 32),
-                                    padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
+                                    //padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                                     width: 250,
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
-                                        colors: sky,
+                                        colors: [Color(0xFF6448FE), Color(0xFF5FC6FF)],
                                         begin: Alignment.centerLeft,
                                         end:  Alignment.centerRight,
                                       ),
@@ -273,62 +302,78 @@ class _StartPageState extends State<StartPage> {
                                       ],
                                       borderRadius: BorderRadius.all(Radius.circular(24)),
                                     ),
-                                    child:Column(
+                                    child: Stack(children: <Widget>[
+                                      Positioned.fill(
+                                          right: -10,
+                                          left: 150,
+                                          top: -100,
+                                          bottom: -150,
+                                          child: Container(decoration: BoxDecoration(
+                                              //boxShadow: customShadow,
+                                              shape: BoxShape.circle, color:Colors.white.withOpacity(0.1)),)),
+                                      Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
+                                          SizedBox(height: 16,),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: <Widget>[
                                               Row(
                                                 children: <Widget>[
-                                                  Icon(
-                                                      Icons.label,
-                                                      color: Colors.purple,
-                                                      size:20),
+                                                  SizedBox(width: 8,),
                                                   Text(
                                                     todo.name,
                                                     style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 20,
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 20,
                                                     ),
                                                   ),
                                                 ],
                                               ),
-
                                             ],
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: <Widget>[
                                               Text(
-                                                'delete Item',
+                                                'Jansori #1',
                                                 style: TextStyle(
-                                                  color: Colors.yellow,
-                                                  fontSize: 14),
+                                                    color: Colors.yellow,
+                                                    fontSize: 14),
                                               ),
+
                                               IconButton(
-                                                icon: Icon(Icons.delete),
-                                                color: Colors.white,
-                                                onPressed: (){
-                                                  deleteToDo(todo.id);
-                                                }),
+                                                  icon: Icon(Icons.delete),
+                                                  color: Colors.white,
+                                                  onPressed: (){
+                                                    deleteToDo(todo.id);
+                                                  }),
+
+
                                             ],
                                           )
                                         ],
-                                      )
+                                      ),
+                                    ],
+
+                                    )
                                   ),
                                 );
-                              }).followedBy([
-                                // FloatingActionButton.extended(
-                                //   onPressed: onSaveToDo,
-                                //   icon: Icon(Icons.alarm),
-                                //   label: Text('save'),
-                                // ),
+                              }).toList()
+                            /*
+                            followedBy([
+                                FloatingActionButton.extended(
+                                  onPressed: onSaveToDo,
+                                  icon: Icon(Icons.alarm),
+                                  label: Text('save'),
+                                ),
                               ]).toList()
+
+                             */
                           );
                         } else {
-                          print("없다");
+                          return CircularProgressIndicator();
                           return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
@@ -340,6 +385,7 @@ class _StartPageState extends State<StartPage> {
                       },
                     ),
                   ),
+                  SizedBox(height: 30,),
                 ],
               ),
               ),
@@ -353,14 +399,39 @@ class _StartPageState extends State<StartPage> {
       toggleValue = !toggleValue;
     });
   }
+  
+  List names=["모델 돌리기","코딩하기","실컷 놀기","커피 먹기"];
+  List isOns=[0,0,0,0];
+  List duringTimes=[10,20,30,40];
+  List restTimes=[11,22,33,44];
+
   void onSaveToDo() {
-    loadToDos();
+    for (int i = 0; i < 4; i++){
+      var todoInfo = ToDoInfo(
+        name: names[i],
+        duringTime: duringTimes[i],
+        restTime: restTimes[i],
+        isOn: isOns[i],
+      );
+      _dbHelper.insertToDo(todoInfo);
+
+      print("저장저장  $num");
+      loadToDos();
+    }
   }
 
   void deleteToDo(int id) {
     _dbHelper.delete(id);
     loadToDos();
   }
+
+  List<BoxShadow> customShadow =[
+    BoxShadow(
+      color: Colors.black,
+      spreadRadius: -5,
+      offset: Offset(5,5),
+      blurRadius: 30),
+  ];
 
   _incrementCounter() async{ //타이머와 연결시켜야 함!
     SharedPreferences prefs=await SharedPreferences.getInstance();

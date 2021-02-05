@@ -1,87 +1,215 @@
 import 'package:flutter/material.dart';
+import 'theme_data.dart';
+import 'package:timmyroom_jansori/models/todo_info.dart';
+import 'models/todo_info.dart';
+import 'DBHelper.dart';
+
+class page2 extends StatefulWidget {
+  @override
+  _page2State createState() => _page2State();
+}
+
+class _page2State extends State<page2> {
+  var sky = GradientTemplate.gradientTemplate[0].colors;
+  var sunset = GradientTemplate.gradientTemplate[1].colors;
+  var sea = GradientTemplate.gradientTemplate[2].colors;
+  var mango = GradientTemplate.gradientTemplate[3].colors;
+  var fire = GradientTemplate.gradientTemplate[4].colors;
+
+  var containerColor = GradientTemplate.gradientTemplate[4].colors;
+
+  String _idString;
+  String _duringTimeString;
+  String _restTimeString;
 
 
+  DBHelper _dbHelper = DBHelper();
+  Future<List<ToDoInfo>> _toDos;
+  List<ToDoInfo> _currentToDos;
+  var _isOn = 1;
 
+  void initState(){
+    // print(_dbHelper.database); Future<Database>
+    _dbHelper.initDB().then((value) {
+      print('-----------datata intialized---------');
+      loadToDos();
+    });
+    super.initState();
+  }
 
-class alarmList extends StatelessWidget {
+  void _changeONOFF(index){
+    setState(() {
+      switch (index) {
+        case 0:
 
-  List titles=["모델 돌리기","코딩하기","3","4","5","6","7","8","9","10"];
-  List subTitles=["11","22","33","44","55","66","77","88","99","1010"];
-  List concentrateTime=["10","20","30","40","50","60","70","80","90","100"];
-  List breakTime=["1","22","33","44","55","66","77","88","99","1010"];
+      }
+    });
+  }
+
+  void loadToDos() {
+    _toDos = _dbHelper.getToDos();
+    if (mounted) setState(() {});
+  }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      body:ListView.builder(
-        itemCount:10,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context,int index)=>Container(
-          width:MediaQuery.of(context).size.width,
-          padding:EdgeInsets.symmetric(horizontal:10.0,vertical:5.0),
-          child:Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child:Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                gradient:LinearGradient(
-                    begin:Alignment.centerLeft,
-                    end:Alignment.centerRight,
-                    colors:[Color.fromRGBO(100, 72 , 254, 0.8),Color.fromRGBO(95, 198, 255, 0.8)]
-                ),
-              ),
-              width:MediaQuery.of(context).size.width,
-              padding:EdgeInsets.symmetric(horizontal:10.0,vertical: 10.0),
-              child:Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children:<Widget>[
-                  Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children:<Widget>[
-                        Container(
-                          width:55.0,
-                          height:55.0,
-                          color: Colors.white,
-                          child:
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.white,
-                            backgroundImage: AssetImage("images/on.png"),
+      appBar: AppBar(
+      backgroundColor: Colors.white.withOpacity(0.1),
+      elevation: 0, // 앱바 그림자 없애기
+      title: Text('List',
+        style: TextStyle(color: Colors.white.withOpacity(0.8)),),
+      centerTitle : true,
+      ),
+      backgroundColor: Color.fromRGBO(44, 44, 84, 1.0),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: FutureBuilder<List<ToDoInfo>> (
+                  future: _toDos,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      _currentToDos = snapshot.data;
+                      return ListView(
+                          //shrinkWrap: true,
+                        children: snapshot.data.map<Widget>((todo) {
+                        String onOffImg;
+                        return GestureDetector(
+                          onTap: () {
+                            print(todo.id); // 나중엔 수정하는 뭐 뜨게 ㅇㅇ
+                          },
+                          // **************************** 할일 목록
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                bottom: 16, left: 20.0, right: 20.0),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(26),
+                              gradient: LinearGradient(
+                                colors: [Color(0xFF6448FE).withOpacity(0.5), Color(0xFF5FC6FF)],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: sky.last.withOpacity(0.4),
+                                    blurRadius: 8,
+                                    spreadRadius: 2,
+                                    offset: Offset(3, 3)),
+                              ],
+                            ),
+                            //width: MediaQuery.of(context).size.width,
+                            ///// 이게 박스안에 들어가는 애들 이어야한다.
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    // * * * * * * ** * * * 박스 안 아이템들  * * * * ** * * * * * *
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          GestureDetector(
+                                            onTap: () {
+                                              if(todo.isOn == 1){
+                                                onUpdateIsOn(todo.id, 0);
+                                              } else {
+                                                onUpdateIsOn(todo.id, 1);
+                                              }
+                                              setState(() {});
+                                            },
+                                            child: CircleAvatar(
+                                              radius: 30,
+                                              backgroundColor: Colors.white.withOpacity(0.1),
+                                              foregroundColor: Colors.white.withOpacity(0.1),
+                                              backgroundImage: todo.isOn == 1 ? AssetImage("images/sound_on.png"):AssetImage("images/sound_off2.png"),
+                                            ),
+
+                                          ),
+
+                                        ],
+                                      ),
+                                      SizedBox(width: 10.0),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            todo.name,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(height: 8),
+                                          Text(
+                                            'jansori #0',
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 10.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text("집중 타임",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10.0)),
+                                      Text(
+                                          "${todo.duringTime.toString()}" + "분",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold)),
+                                      Text("휴식 타임",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10.0)),
+                                      Text("${todo.restTime.toString()}" + "분",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(width:15.0),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children:<Widget>[
-                            Text(titles[index],style:TextStyle(color:Colors.white,fontSize:18.0,fontWeight: FontWeight.bold)),
-                            Text(subTitles[index],style:TextStyle(color:Colors.white)),
-                          ],
-                        ),
-                      ]
-                  ),
-                  Container(
-                    alignment:Alignment.center,
-                    padding:EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
-                    child:Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:<Widget>[
-                        Text("집중 타임",style:TextStyle(color:Colors.white,fontSize:10.0)),
-                        Text(concentrateTime[index]+"분",style:TextStyle(color:Colors.white,fontSize:18.0,fontWeight: FontWeight.bold)),
-                        Text("휴식 타임",style:TextStyle(color:Colors.white,fontSize:10.0)),
-                        Text(breakTime[index]+"분",style:TextStyle(color:Colors.white,fontSize:18.0,fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                        );
+                      }).toList());
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                    ;
+                  },
+                ),
+              )
+            ],
           ),
         ),
       ),
     );
   }
+
+  void onUpdateIsOn(int id, int value){
+    _dbHelper.updateIsOn(id, value);
+    loadToDos();
+
+  }
 }
+
