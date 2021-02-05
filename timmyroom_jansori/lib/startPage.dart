@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timmyroom_jansori/record.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'alarmList.dart';
 import 'page3.dart';
@@ -61,6 +62,24 @@ class _StartPageState extends State<StartPage> {
     if(mounted) setState(() {});
   }
 
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => MyApp(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 3.0); // <-
+        var end = Offset.zero;
+        var curve = Curves.ease;
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +91,12 @@ class _StartPageState extends State<StartPage> {
           centerTitle : true,
           backgroundColorStart: Colors.white.withOpacity(0.1),
           backgroundColorEnd: Colors.white.withOpacity(0.0),
+          actions: [
+            IconButton(
+                icon: Icon(Icons.music_note_sharp),
+                onPressed: ()=> {Navigator.of(context).push(_createRoute())},
+            )
+          ],
         ),
         body: PageView(
           controller: pageController,
