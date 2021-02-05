@@ -36,65 +36,68 @@ class Page3 extends State<MainPage3>{
   Widget home(){
     return Scaffold(
       backgroundColor: Color.fromRGBO(44, 44, 84, 1.0),
-      body: popup(),
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(child: popup()),
     );
   }
 
   Widget popup(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-
-            Container(
-              width: 300,
-              height: 520,
-              decoration:
-              BoxDecoration(
-                //color: Colors.white.withOpacity(0.1),
-                gradient: LinearGradient(
-                  colors: [Color(0xFF6448FE).withOpacity(0.2), Color(0xFF5FC6FF).withOpacity(0.3)],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xFF6448FE).withOpacity(0.2),
-                    spreadRadius: 10, // 그림자 진하기 .. ?
-                    blurRadius: 7, // 그림자 얼마나  blur
-                    offset: Offset(0, 3),
-                  ),
-                ],
-                border: Border.all(
-                  width: 4,
-                  color: Colors.grey.withOpacity(0.1),
-                  // color: Color.fromRGBO(93, 136, 248, 0.8),
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
-              child:
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 100,),
               Container(
-                width: 255,
-                margin: EdgeInsets.all(15),
+                width: 300,
+                height: 520,
+                decoration:
+                BoxDecoration(
+                  //color: Colors.white.withOpacity(0.1),
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF6448FE).withOpacity(0.2), Color(0xFF5FC6FF).withOpacity(0.3)],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xFF6448FE).withOpacity(0.2),
+                      spreadRadius: 10, // 그림자 진하기 .. ?
+                      blurRadius: 7, // 그림자 얼마나  blur
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                  border: Border.all(
+                    width: 4,
+                    color: Colors.grey.withOpacity(0.1),
+                    // color: Color.fromRGBO(93, 136, 248, 0.8),
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
                 child:
-                Form(
-                  key: _formKey,
+                Container(
+                  width: 255,
+                  margin: EdgeInsets.all(15),
                   child:
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      timeSetting(),
-                      nameSetting(),
-                      jansoriSetting(),
-                      submitButton(),
-                    ],
+                  Form(
+                    key: _formKey,
+                    child:
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        timeSetting(),
+                        nameSetting(),
+                        jansoriSetting(),
+                        submitButton(),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -177,15 +180,15 @@ class Page3 extends State<MainPage3>{
                     Container(
                       decoration:
                       BoxDecoration(
-                        color: Colors.white.withOpacity(0.3),
-                        gradient: LinearGradient(colors: [Color(0xFFFFA738).withOpacity(0.3), Color(0xFFFFE130).withOpacity(0.3)], begin: Alignment.bottomCenter, end: Alignment.topCenter,),
+                        color: Colors.white.withOpacity(0.1),
+                        //gradient: LinearGradient(colors: [Color(0xFFFFA738).withOpacity(0.3), Color(0xFFFFE130).withOpacity(0.3)], begin: Alignment.bottomCenter, end: Alignment.topCenter,),
                         border: Border.all(
                           width: 1,
                           color: Colors.grey.withOpacity(0.1),
                           // color: Color.fromRGBO(93, 136, 248, 0.8),
                         ),
                         borderRadius: BorderRadius.all(
-                          Radius.circular(50),
+                          Radius.circular(40),
                         ),
                       ),
                       height: 70,
@@ -239,15 +242,15 @@ class Page3 extends State<MainPage3>{
                         height: 70,
                         decoration:
                         BoxDecoration(
-                          color: Colors.white.withOpacity(0.3),
-                          gradient: LinearGradient(colors: [Color(0xFFFFA738).withOpacity(0.3), Color(0xFFFFE130).withOpacity(0.3)], begin: Alignment.bottomCenter, end: Alignment.topCenter,),
+                          color: Colors.white.withOpacity(0.1),
+                          //gradient: LinearGradient(colors: [Color(0xFFFFA738).withOpacity(0.3), Color(0xFFFFE130).withOpacity(0.3)], begin: Alignment.bottomCenter, end: Alignment.topCenter,),
                           border: Border.all(
                             width: 1,
                             color: Colors.grey.withOpacity(0.1),
                             // color: Color.fromRGBO(93, 136, 248, 0.8),
                           ),
                           borderRadius: BorderRadius.all(
-                            Radius.circular(50),
+                            Radius.circular(40),
                           ),
                         ),
                         // color: Colors.amber,

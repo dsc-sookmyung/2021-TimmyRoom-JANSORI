@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:timmyroom_jansori/testPage.dart';
 import 'pageSlider.dart';
 import 'dart:async';
-
+import 'testPage.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 void main() {

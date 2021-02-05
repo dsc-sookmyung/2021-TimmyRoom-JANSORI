@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import "timer.dart";
+import "testTimer.dart";
 import 'package:carousel_slider/carousel_slider.dart';
 import "theme_data.dart";
 import 'package:timmyroom_jansori/models/todo_info.dart';
@@ -72,72 +72,78 @@ class _StartPageState extends State<StartPage> {
                   // **************** 원 두개
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      // *********** 하얀 작은 원
+                    child:GestureDetector(
+                        onTap: (){
+                          print("STRRT 클릭");
+                          _incrementCounter();
+                        },
                       child: Container(
+                        // *********** 하얀 작은 원
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.5),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: Colors.black12,
+                                  width: 2),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: sky.last.withOpacity(0.4),
+                                  spreadRadius: 10, // 그림자 진하기 .. ?
+                                  blurRadius: 7, // 그림자 얼마나  blur
+                                  offset: Offset(0, 3),
+                                ),
+                              ]
+                          ),
+                          child: Column(
+                            //mainAxisAlignment: MainAxisAlignment.center,
+                            //crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(height: 60,),
+                              Text(
+                                clickedName,
+                                style: TextStyle(
+                                  color: Colors.black26,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              Text(
+                                "START",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        //************* 테두리
+                        // 큰 원을 그린다
+                        height: 220,
+                        width: 220,
+
                         decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.5),
+                            gradient: LinearGradient(
+                              colors: sky,
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                            ),
+                          //color: Colors.white.withOpacity(0.9),
                             shape: BoxShape.circle,
                             border: Border.all(
                                 color: Colors.black12,
-                                width: 2),
+                                width: 11),
                             boxShadow: [
                               BoxShadow(
-                                color: sky.last.withOpacity(0.4),
-                                spreadRadius: 10, // 그림자 진하기 .. ?
-                                blurRadius: 7, // 그림자 얼마나  blur
+                                color: sky.last.withOpacity(0.2),
+                                spreadRadius: 7, // 그림자 진하기 .. ?
+                                blurRadius: 4, // 그림자 얼마나  blur
                                 offset: Offset(0, 3),
                               ),
                             ]
                         ),
-                        child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.center,
-                          //crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(height: 60,),
-                            Text(
-                              clickedName,
-                              style: TextStyle(
-                                color: Colors.black26,
-                                fontSize: 15,
-                              ),
-                            ),
-                            Text(
-                              "START",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      //************* 테두리
-                      // 큰 원을 그린다
-                      height: 220,
-                      width: 220,
-
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: sky,
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                          ),
-                        //color: Colors.white.withOpacity(0.9),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: Colors.black12,
-                              width: 11),
-                          boxShadow: [
-                            BoxShadow(
-                              color: sky.last.withOpacity(0.2),
-                              spreadRadius: 7, // 그림자 진하기 .. ?
-                              blurRadius: 4, // 그림자 얼마나  blur
-                              offset: Offset(0, 3),
-                            ),
-                          ]
                       ),
                     ),
                   ),
@@ -272,6 +278,10 @@ class _StartPageState extends State<StartPage> {
                       builder: (context, snapshot,) {
                         if (snapshot.hasData) {
                           _currentToDos = snapshot.data;
+                          print(_currentToDos.length);
+                          if(_currentToDos.length == 0){
+                            Text("할일을 추가해주세요");
+                          }
                           return ListView(
                               scrollDirection: Axis.horizontal,
                               children: snapshot.data.map<Widget>((todo) {
