@@ -56,7 +56,7 @@ class Page3 extends State<MainPage3>{
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 100,),
+                SizedBox(height: 60,),
                 Container(
                   width: 300,
                   height: 620,
@@ -227,7 +227,7 @@ class Page3 extends State<MainPage3>{
     );
     _dbHelper.insertToDo(todoInfo);
     print(colName);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => StartPage()), (route) => false);
   }
 
   Widget submitButton(){

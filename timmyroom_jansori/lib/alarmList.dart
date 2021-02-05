@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'page3.dart';
+import 'testPage.dart';
 import 'theme_data.dart';
 import 'package:timmyroom_jansori/models/todo_info.dart';
 import 'models/todo_info.dart';
@@ -46,14 +48,14 @@ class _page2State extends State<page2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GradientAppBar(
-        elevation: 0, // 앱바 그림자 없애기
-        title: Text('list',
-          style: TextStyle(color: Colors.white.withOpacity(0.8)),),
-        centerTitle : true,
-        backgroundColorStart: Colors.white.withOpacity(0.0),
-        backgroundColorEnd: Colors.white.withOpacity(0.1),
-      ),
+      // appBar: GradientAppBar(
+      //   elevation: 0, // 앱바 그림자 없애기
+      //   title: Text('list',
+      //     style: TextStyle(color: Colors.white.withOpacity(0.8)),),
+      //   centerTitle : true,
+      //   backgroundColorStart: Colors.white.withOpacity(0.0),
+      //   backgroundColorEnd: Colors.white.withOpacity(0.1),
+      // ),
       backgroundColor: Color.fromRGBO(44, 44, 84, 1.0),
       body: SafeArea(
         child: Center(
@@ -186,7 +188,9 @@ class _page2State extends State<page2> {
                         );
                       }).followedBy([
                           FloatingActionButton.extended(
-                            onPressed: onSaveToDo,
+                            onPressed: () {
+                              Navigator.of(context).push(_createRoute());
+                            },
                             icon: Icon(Icons.alarm),
                             label: Text('save'),
                           ),
@@ -204,6 +208,23 @@ class _page2State extends State<page2> {
           ),
         ),
       ),
+    );
+  }
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => MainPage3(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(1.5, 0.0); // <-
+        var end = Offset.zero;
+        var tween = Tween(begin: begin, end: end);
+        var offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
     );
   }
 
