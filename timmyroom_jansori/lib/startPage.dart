@@ -39,7 +39,7 @@ class _StartPageState extends State<StartPage> {
   void initState(){
     // print(_dbHelper.database); Future<Database>
     _dbHelper.initDB().then((value) {
-      print('-----------datata intialized--------- $value');
+      print('-----------datata intialized---------');
       loadToDos();
     });
 
@@ -272,7 +272,6 @@ class _StartPageState extends State<StartPage> {
                       builder: (context, snapshot,) {
                         if (snapshot.hasData) {
                           _currentToDos = snapshot.data;
-                          print(snapshot.data);
                           return ListView(
                               scrollDirection: Axis.horizontal,
                               children: snapshot.data.map<Widget>((todo) {
@@ -343,7 +342,7 @@ class _StartPageState extends State<StartPage> {
                                                     color: Colors.yellow,
                                                     fontSize: 14),
                                               ),
-                                              /*
+
                                               IconButton(
                                                   icon: Icon(Icons.delete),
                                                   color: Colors.white,
@@ -351,7 +350,7 @@ class _StartPageState extends State<StartPage> {
                                                     deleteToDo(todo.id);
                                                   }),
 
-                                               */
+
                                             ],
                                           )
                                         ],
@@ -361,13 +360,17 @@ class _StartPageState extends State<StartPage> {
                                     )
                                   ),
                                 );
-                              }).followedBy([
+                              }).toList()
+                            /*
+                            followedBy([
                                 FloatingActionButton.extended(
                                   onPressed: onSaveToDo,
                                   icon: Icon(Icons.alarm),
                                   label: Text('save'),
                                 ),
                               ]).toList()
+
+                             */
                           );
                         } else {
                           return CircularProgressIndicator();
@@ -382,7 +385,7 @@ class _StartPageState extends State<StartPage> {
                       },
                     ),
                   ),
-                  SizedBox(height: 60,),
+                  SizedBox(height: 30,),
                 ],
               ),
               ),

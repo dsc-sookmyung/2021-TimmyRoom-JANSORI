@@ -43,8 +43,8 @@ class _HomePageState extends State<HomePage> {
           print(pageChanged);
         },
         children: [
-          page2(),
           StartPage(),
+          page2(),
           MainPage3(),
         ],
       )
