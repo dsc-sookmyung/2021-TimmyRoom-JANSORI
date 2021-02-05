@@ -174,7 +174,6 @@ class Page3 extends State<MainPage3>{
                                                 onTapUp: (TapUpDetails details){
                                                   print("녹음 끝");
                                                 },
-
                                                 child: Container(
                                                   margin: EdgeInsets.fromLTRB(10, 0, 10, 0.05),
                                                   height: 30,
