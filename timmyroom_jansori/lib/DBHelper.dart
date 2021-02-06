@@ -9,7 +9,7 @@ String colName = 'name';
 String colDuringTime = 'duringTime';
 String colRestTime = 'restTime';
 String colIsOn = 'isOn';
-
+String colSoundIdx = 'soundIdx';
 
 class DBHelper {
   static Database _database;
@@ -45,7 +45,8 @@ class DBHelper {
               $colName TEXT,
               $colDuringTime INTEGER,
               $colRestTime INTEGER,
-              $colIsOn INTEGER
+              $colIsOn INTEGER,
+              $colSoundIdx TEXT
               )
             ''');
         },
