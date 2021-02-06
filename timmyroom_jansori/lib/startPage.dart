@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:timmyroom_jansori/record.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -493,9 +494,12 @@ class _StartPageState extends State<StartPage> {
       new Duration(seconds: 1),
     );
 
+    AudioPlayer audioPlayer = AudioPlayer();
     // 학습   시작하면 시작했다고 알려주
-    var startAudioPath="1.m4a";
-    player.play(startAudioPath);
+    print(soundList[0]);
+    var startAudioPath=soundList[0];
+    audioPlayer.play(startAudioPath, isLocal: true);
+    //player.play(startAudioPath);
 
     var duringTimer = countdownTimer.listen(null);
     duringTimer.onData((duration) {
@@ -507,8 +511,8 @@ class _StartPageState extends State<StartPage> {
     duringTimer.onDone(() {
       print("   TIMES UP!   ");
       // 학습시간 끝
-      var alarmAudioPath="2.m4a";
-      player.play(alarmAudioPath);
+      var endAudioPath="2.m4a";
+      audioPlayer.play(endAudioPath, isLocal: true);
       restStartTimer(rstart, rcurrent);
       duringTimer.cancel();
     });

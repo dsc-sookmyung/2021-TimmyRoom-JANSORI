@@ -1,7 +1,7 @@
 import 'package:timmyroom_jansori/models/todo_info.dart';
 
 
-List<int> soundList = List<int>();
+List<String> soundList = List<String>();
 
 //list 추가
 // soundList.add(43);

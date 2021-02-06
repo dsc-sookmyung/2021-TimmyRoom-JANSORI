@@ -10,6 +10,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_audio_recorder/flutter_audio_recorder.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'data.dart';
+
 void main() {
   SystemChrome.setEnabledSystemUIOverlays([]);
   return runApp(new MyApp());
@@ -253,6 +255,7 @@ class RecorderExampleState extends State<RecorderExample> {
 
   void onPlayAudio() async {
     AudioPlayer audioPlayer = AudioPlayer();
+    soundList.add(_current.path);
     await audioPlayer.play(_current.path, isLocal: true);
   }
 }
