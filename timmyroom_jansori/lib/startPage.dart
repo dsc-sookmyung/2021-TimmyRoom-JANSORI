@@ -44,6 +44,9 @@ class _StartPageState extends State<StartPage> {
   Future<List<ToDoInfo>> _toDos;
   List<ToDoInfo> _currentToDos;
 
+  SoundHelper _sdHelper = SoundHelper();
+  List<SoundInfo> _sounds;
+
   PageController pageController = PageController(initialPage: 0);
   int pageChanged = 0;
 
@@ -60,6 +63,9 @@ class _StartPageState extends State<StartPage> {
 
   void loadToDos() {
     _toDos = _dbHelper.getToDos();
+    sounds = _sdHelper.getSounds();
+    print("중요");
+    print(sounds[0].path);
     if(mounted) setState(() {});
   }
 
@@ -398,6 +404,15 @@ class _StartPageState extends State<StartPage> {
               );
             }
           },
+        ),
+
+        child: FutureBuilder<List<SoundInfo>>(
+          future: sounds,
+          builer(context, snapshot,){
+            if(snapshot.hasData{
+
+        })
+        },
         ),
       ),
       SizedBox(height: 30,),
