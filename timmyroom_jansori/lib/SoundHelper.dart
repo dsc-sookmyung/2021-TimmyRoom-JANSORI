@@ -6,7 +6,7 @@ import 'package:timmyroom_jansori/models/todo_info.dart';
 
 final String tableName = 'sounds';
 final String colId = 'id';
-
+final String colPath = 'path';
 
 class SoundHelper {
   static Database _soundDatabase;
@@ -30,7 +30,7 @@ class SoundHelper {
 
   Future<Database> initDB() async {
     var dir = await getDatabasesPath();
-    var path = dir + "soundDB.db";
+    var path = dir + "soundDB2.db";
 
     var database = await openDatabase(
       path,
@@ -38,7 +38,8 @@ class SoundHelper {
       onCreate: (db, version) async {
         await db.execute('''
             CREATE TABLE $tableName(
-              $colId INTEGER NOT NULL PRIMARY KEY)
+              $colId INTEGER NOT NULL PRIMARY KEY),
+              $colPath TEXT
             ''');
       },
     );

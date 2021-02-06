@@ -9,8 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_audio_recorder/flutter_audio_recorder.dart';
 import 'package:path_provider/path_provider.dart';
-
-import 'data.dart';
+import 'SoundHelper.dart';
 
 void main() {
   SystemChrome.setEnabledSystemUIOverlays([]);
@@ -36,6 +35,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 class RecorderExample extends StatefulWidget {
+  SoundHelper _dbHelper = SoundHelper();
   final LocalFileSystem localFileSystem;
 
   RecorderExample({localFileSystem})
@@ -255,7 +255,8 @@ class RecorderExampleState extends State<RecorderExample> {
 
   void onPlayAudio() async {
     AudioPlayer audioPlayer = AudioPlayer();
-    soundList.add(_current.path);
+    var soundInfo = SoundInfo(path: _current.path);
+    _dbHelper.insertSound(soundInfo);
     await audioPlayer.play(_current.path, isLocal: true);
   }
 }
