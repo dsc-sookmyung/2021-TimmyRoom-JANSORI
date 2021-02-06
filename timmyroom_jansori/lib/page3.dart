@@ -487,16 +487,14 @@ class Page3 extends State<MainPage3>{
   }
 
   void onSaveSound(){
-    /*
-    for(int i = 0; i < 4; i++){
-      var soundInfo = SoundInfo(
-        id: i,
-      );
-
-     */
-      _dbHelper.insertSound(soundInfo);
-      loadSounds();
-    }
+    // for(int i = 0; i < 4; i++){
+    //   var soundInfo = SoundInfo(
+    //     id: i,
+    //   );
+    //
+    //   _dbHelper.insertSound(soundInfo);
+    //   loadSounds();
+    // }
   }
 
 

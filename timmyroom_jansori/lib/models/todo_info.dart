@@ -4,10 +4,7 @@ class ToDoInfo {
   int duringTime; // 집중 시간 ?
   int restTime; // 휴식시간
   int isOn; // 알람켜졌냐
-  bool isDuringStart; // 시작했냐
-  bool isDuringEnd; // 끝났냐
-  bool isRestStart; //
-  bool isRestEnd; //
+  int soundIdx;
 
   ToDoInfo(
       {this.id,
@@ -15,6 +12,7 @@ class ToDoInfo {
         this.duringTime,
         this.restTime,
         this.isOn,
+        this.soundIdx,
       }
   );
 
@@ -24,6 +22,7 @@ class ToDoInfo {
     duringTime: json["duringTime"],
     restTime: json["restTime"],
     isOn: json["isOn"],
+    soundIdx: json["soundIdx"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -32,6 +31,7 @@ class ToDoInfo {
     "duringTime": duringTime,
     "restTime": restTime,
     "isOn": isOn,
+    "soundIdx": soundIdx,
   };
 }
 
