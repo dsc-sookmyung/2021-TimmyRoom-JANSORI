@@ -4,3 +4,8 @@
 <br/>
 <br/>
 <img width="1273" alt="1612670314490" src="https://user-images.githubusercontent.com/53217988/107156103-a605cc80-69bf-11eb-93a7-2c88b9602814.png">
+<br/>
+<br/>
+<strong>DSC KR Solution Challenge Hackathon Top 10 선정!</strong>
+<br/>
+<img width="1273" alt="1612670314490" src="https://user-images.githubusercontent.com/53217988/107156240-90dd6d80-69c0-11eb-96de-44c94f9b937b.png">
